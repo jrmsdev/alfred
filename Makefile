@@ -8,7 +8,7 @@ build:
 .PHONY: clean
 clean:
 	go clean -i -cache -testcache ./...
-	rm -f coverage.out coverage.html
+	@rm -f coverage.out coverage.html
 
 .PHONY: check
 check:
