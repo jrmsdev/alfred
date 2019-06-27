@@ -73,18 +73,18 @@ func NotMatch(t *testing.T, pat, s, errmsg string) bool {
 }
 
 //~ func NotFileChecksum(t *testing.T, got []byte, fn string) bool {
-	//~ t.Helper()
-	//~ fh, err := os.Open(filepath.FromSlash(fn))
-	//~ if err != nil {
-		//~ t.Fatalf("%s: %s", fn, err.Error())
-		//~ return true
-	//~ }
-	//~ defer fh.Close()
-	//~ h := md5.New()
-	//~ if _, err := io.Copy(h, fh); err != nil {
-		//~ t.Fatalf("%s: %s", fn, err.Error())
-		//~ return true
-	//~ }
-	//~ return NotEqual(t, fmt.Sprintf("%x", md5.Sum(got)),
-		//~ fmt.Sprintf("%x", h.Sum(nil)), "checksum "+fn)
+//~ t.Helper()
+//~ fh, err := os.Open(filepath.FromSlash(fn))
+//~ if err != nil {
+//~ t.Fatalf("%s: %s", fn, err.Error())
+//~ return true
+//~ }
+//~ defer fh.Close()
+//~ h := md5.New()
+//~ if _, err := io.Copy(h, fh); err != nil {
+//~ t.Fatalf("%s: %s", fn, err.Error())
+//~ return true
+//~ }
+//~ return NotEqual(t, fmt.Sprintf("%x", md5.Sum(got)),
+//~ fmt.Sprintf("%x", h.Sum(nil)), "checksum "+fn)
 //~ }
