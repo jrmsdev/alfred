@@ -34,13 +34,11 @@ RUN chmod 750 /go
 
 USER alfred:alfred
 
-RUN umask 027
-
 RUN echo '### alfred setup' >>/home/alfred/.bashrc
 RUN echo 'umask 027' >>/home/alfred/.bashrc
 RUN echo "PS1='docker:\W\$ '" >>/home/alfred/.bashrc
 
-RUN mkdir -p /go/src/github.com/jrmsdev/alfred
+RUN (umask 027 && mkdir -p /go/src/github.com/jrmsdev/alfred)
 WORKDIR /go/src/github.com/jrmsdev/alfred
 
 CMD /bin/bash
