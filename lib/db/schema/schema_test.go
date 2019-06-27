@@ -6,7 +6,7 @@ package schema
 import (
 	"testing"
 
-	"github.com/jrmsdev/alfred/_t/check"
+	"github.com/jrmsdev/alfred/internal/_t/check"
 )
 
 func TestSchema(t *testing.T) {

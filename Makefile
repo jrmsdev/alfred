@@ -15,4 +15,8 @@ check:
 
 .PHONY: gofmt
 gofmt:
-	gofmt -w -l -s _t lib
+	gofmt -w -l -s internal lib
+
+.PHONY: goenv
+goenv:
+	@go env | sort -t '=' -k1,1
