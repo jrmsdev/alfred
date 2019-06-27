@@ -13,7 +13,7 @@ RUN apt-get clean
 RUN apt-get update
 
 RUN apt-get dist-upgrade -yy --purge
-RUN apt-get install -yy --no-install-recommends sudo golang
+RUN apt-get install -yy --no-install-recommends sudo golang golang-golang-x-tools
 
 RUN apt-get clean
 RUN apt-get autoremove -yy --purge
