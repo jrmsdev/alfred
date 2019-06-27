@@ -1,4 +1,5 @@
 GOPATH := /go
+ALFRED_TEST ?=
 
 .PHONY: build
 build:
@@ -10,7 +11,7 @@ clean:
 
 .PHONY: check
 check:
-	go test ./...
+	go test $(ALFRED_TEST) ./...
 
 .PHONY: gofmt
 gofmt:
