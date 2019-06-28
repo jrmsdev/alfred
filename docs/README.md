@@ -1,3 +1,4 @@
-# alfred documentation
+# Documentation
 
-Alfred, the house master (mayordomo).
+* [Install](./install)
+* [Devel](./devel)
