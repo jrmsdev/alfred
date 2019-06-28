@@ -27,7 +27,7 @@ matrix:
         - ALFRED_TEST="-race"
 
 install:
-  - make build
+  - ./build.sh
 
 script:
-  - make check
+  - ./check.sh
