@@ -13,11 +13,11 @@ import (
 )
 
 type logger struct {
-	Debug  func(io.Writer, string)
-	Print  func(io.Writer, string)
-	Warn   func(io.Writer, string)
-	Error  func(io.Writer, string)
-	Format func(string, ...interface{}) string
+	Debug   func(io.Writer, string)
+	Print   func(io.Writer, string)
+	Warn    func(io.Writer, string)
+	Error   func(io.Writer, string)
+	Format  func(string, ...interface{}) string
 	Formatf func(string, string, ...interface{}) string
 }
 
@@ -30,40 +30,40 @@ var (
 var lvlTag = map[string]string{
 	"debug": "D: ",
 	"error": "E: ",
-	"warn": "W: ",
-	"msg": "",
+	"warn":  "W: ",
+	"msg":   "",
 }
 
 // colors
 
 var (
-	//~ cyan = `\033[0;36m`
-	red = `\033[0;31m`
-	yellow = `\033[0;33m`
-	//~ blue = `\033[0;34m`
-	green = `\033[0;32m`
-	grey = `\033[1;30m`
-	reset = `\033[0m`
+	//~ cyan = "\033[0;36m"
+	//~ blue = "\033[0;34m"
+	red    = "\033[0;31m"
+	yellow = "\033[0;33m"
+	green  = "\033[0;32m"
+	grey   = "\033[1;30m"
+	reset  = "\033[0m"
 )
 
 var lvlColor = map[string]string{
 	"debug": grey,
 	"error": red,
-	"warn": yellow,
-	"msg": green,
+	"warn":  yellow,
+	"msg":   green,
 }
 
-//~ func init() {
-	//~ colored = false
-	//~ if istty(os.Stdout) && istty(os.Stderr) {
-		//~ colored = true
-	//~ }
-//~ }
+func init() {
+	colored = false
+	if istty(os.Stdout) && istty(os.Stderr) {
+		colored = true
+	}
+}
 
 func istty(fh *os.File) bool {
 	if st, err := fh.Stat(); err == nil {
 		m := st.Mode()
-		if m & os.ModeDevice != 0 && m & os.ModeCharDevice != 0 {
+		if m&os.ModeDevice != 0 && m&os.ModeCharDevice != 0 {
 			return true
 		}
 	}
@@ -110,9 +110,9 @@ func Init(level string) {
 	//~ Debug("level %s", level)
 	//~ Debug("stderr %s", os.Stderr.Name())
 	//~ if st, err := os.Stderr.Stat(); err == nil {
-		//~ Debug("stderr %s", st.Mode())
+	//~ Debug("stderr %s", st.Mode())
 	//~ } else {
-		//~ Error(err)
+	//~ Error(err)
 	//~ }
 }
 
