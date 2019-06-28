@@ -21,7 +21,7 @@ coverage:
 
 .PHONY: gofmt
 gofmt:
-	gofmt -w -l -s internal lib
+	gofmt -w -l -s bin internal lib
 
 .PHONY: goenv
 goenv:
