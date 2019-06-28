@@ -5,6 +5,7 @@ package log
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -12,48 +13,107 @@ import (
 )
 
 type logger struct {
-	Debug  func(string, ...interface{})
-	Errorf func(string, ...interface{})
-	Error  func(error)
-	Warnf  func(string, ...interface{})
-	Warn   func(error)
-	Printf func(string, ...interface{})
-	Print  func(...interface{})
+	Debug  func(io.Writer, string)
+	Print  func(io.Writer, string)
+	Warn   func(io.Writer, string)
+	Error  func(io.Writer, string)
+	Format func(string, ...interface{}) string
+	Formatf func(string, string, ...interface{}) string
 }
 
 var (
 	l        *logger
 	shortIdx int
+	colored  bool
 )
 
-var lvls string = "warn, error or quiet"
-
-func Init(level string) error {
-	l = new(logger)
-	l.Debug = quietf
-	l.Errorf = errorf
-	l.Error = perror
-	l.Warnf = quietf
-	l.Warn = quieterr
-	l.Printf = printf
-	l.Print = print
-	if level == "debug" {
-		l.Debug = debug
-		l.Warnf = warnf
-		l.Warn = warn
-	} else if level == "warn" {
-		l.Warnf = warnf
-		l.Warn = warn
-	} else if level == "quiet" {
-		l.Printf = quietf
-		l.Print = quiet
-	}
-	shortIdx = getShortIdx()
-	return nil
+var lvlTag = map[string]string{
+	"debug": "D: ",
+	"error": "E: ",
+	"warn": "W: ",
+	"msg": "",
 }
 
-func Levels() string {
-	return lvls
+// colors
+
+var (
+	//~ cyan = `\033[0;36m`
+	red = `\033[0;31m`
+	yellow = `\033[0;33m`
+	//~ blue = `\033[0;34m`
+	green = `\033[0;32m`
+	grey = `\033[1;30m`
+	reset = `\033[0m`
+)
+
+var lvlColor = map[string]string{
+	"debug": grey,
+	"error": red,
+	"warn": yellow,
+	"msg": green,
+}
+
+//~ func init() {
+	//~ colored = false
+	//~ if istty(os.Stdout) && istty(os.Stderr) {
+		//~ colored = true
+	//~ }
+//~ }
+
+func istty(fh *os.File) bool {
+	if st, err := fh.Stat(); err == nil {
+		m := st.Mode()
+		if m & os.ModeDevice != 0 && m & os.ModeCharDevice != 0 {
+			return true
+		}
+	}
+	return false
+}
+
+// init level
+
+func Init(level string) {
+	l = new(logger)
+	l.Debug = quiet
+	l.Print = print
+	l.Warn = print
+	l.Error = print
+	if level == "debug" {
+		l.Debug = print
+		l.Print = print
+		l.Warn = print
+		l.Error = print
+	} else if level == "warn" {
+		l.Debug = quiet
+		l.Print = quiet
+		l.Warn = print
+		l.Error = print
+	} else if level == "error" {
+		l.Debug = quiet
+		l.Print = quiet
+		l.Warn = quiet
+		l.Error = print
+	} else if level == "quiet" {
+		l.Debug = quiet
+		l.Print = quiet
+		l.Warn = quiet
+		l.Error = quiet
+	}
+	shortIdx = getShortIdx()
+	if colored {
+		l.Format = color
+		l.Formatf = colorf
+	} else {
+		l.Format = mfmt
+		l.Formatf = mfmtf
+	}
+	//~ Debug("level %s", level)
+	//~ Debug("stderr %s", os.Stderr.Name())
+	//~ if st, err := os.Stderr.Stat(); err == nil {
+		//~ Debug("stderr %s", st.Mode())
+	//~ } else {
+		//~ Error(err)
+	//~ }
 }
 
 func getShortIdx() int {
@@ -66,73 +126,68 @@ func getShortIdx() int {
 	return 0
 }
 
-func quietf(format string, args ...interface{}) {
+// message format/color functions
+
+func mfmt(lvl string, args ...interface{}) string {
+	tag := lvlTag[lvl]
+	return fmt.Sprintf("%s%s", tag, fmt.Sprint(args...))
 }
 
-func quiet(args ...interface{}) {
+func mfmtf(lvl string, format string, args ...interface{}) string {
+	tag := lvlTag[lvl]
+	return fmt.Sprintf("%s%s", tag, fmt.Sprintf(format, args...))
 }
 
-func quieterr(err error) {
+func color(lvl string, args ...interface{}) string {
+	clr := lvlColor[lvl]
+	return fmt.Sprint(clr, fmt.Sprint(args...), reset)
 }
 
-func errorf(format string, args ...interface{}) {
-	fmt.Fprintf(os.Stderr, "E: "+format+"\n", args...)
+func colorf(lvl string, format string, args ...interface{}) string {
+	clr := lvlColor[lvl]
+	return fmt.Sprint(clr, fmt.Sprintf(format, args...), reset)
 }
 
-func perror(err error) {
-	errorf("%s", err)
+// logger helpers
+
+func quiet(outs io.Writer, msg string) {
 }
 
-func warnf(format string, args ...interface{}) {
-	fmt.Fprintf(os.Stderr, "W: "+format+"\n", args...)
+func print(outs io.Writer, msg string) {
+	fmt.Fprintf(outs, "%s\n", msg)
 }
 
-func warn(err error) {
-	warnf("%s", err)
-}
-
-func printf(format string, args ...interface{}) {
-	fmt.Printf(format+"\n", args...)
-}
-
-func print(args ...interface{}) {
-	fmt.Print(args...)
-	fmt.Print("\n")
-}
-
-func debug(format string, args ...interface{}) {
-	tag := "D: "
-	_, fn, ln, ok := runtime.Caller(2)
-	if ok {
-		tag = fmt.Sprintf("D: %s:%d: ", fn[shortIdx:], ln)
-	}
-	fmt.Fprintf(os.Stderr, tag+format+"\n", args...)
-}
+// public functions
 
 func Debug(format string, args ...interface{}) {
-	l.Debug(format, args...)
+	finfo := ""
+	if _, fn, ln, ok := runtime.Caller(1); ok {
+		finfo = fmt.Sprintf("%s:%d: ", fn[shortIdx:], ln)
+	}
+	l.Debug(os.Stderr, l.Format("debug",
+		fmt.Sprintf("%s%s", finfo, fmt.Sprintf(format, args...))))
 }
 
 func Errorf(format string, args ...interface{}) {
-	l.Errorf(format, args...)
+	l.Error(os.Stderr, l.Formatf("error", format, args...))
 }
 
 func Error(err error) {
-	l.Error(err)
+	l.Error(os.Stderr, l.Format("error", err))
 }
 
 func Warnf(format string, args ...interface{}) {
-	l.Warnf(format, args...)
+	l.Warn(os.Stderr, l.Formatf("warn", format, args...))
 }
 
 func Warn(err error) {
-	l.Warn(err)
+	l.Warn(os.Stderr, l.Format("warn", err))
 }
 
 func Printf(format string, args ...interface{}) {
-	l.Printf(format, args...)
+	l.Print(os.Stdout, l.Formatf("msg", format, args...))
 }
 
 func Print(args ...interface{}) {
-	l.Print(args...)
+	l.Print(os.Stdout, l.Format("msg", args...))
 }

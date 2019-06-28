@@ -10,4 +10,8 @@ import (
 func main() {
 	log.Init("debug")
 	log.Debug("alfred main")
+	log.Warnf("warning")
+	log.Errorf("error")
+	log.Print("msg")
+	log.Debug("end")
 }
