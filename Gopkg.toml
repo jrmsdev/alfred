@@ -33,6 +33,10 @@
   name = "github.com/smartystreets/goconvey"
   version = "1.6.3"
 
+[[override]]
+  name = "golang.org/x/crypto"
+  branch = "master"
+
 [prune]
   go-tests = true
   unused-packages = true
