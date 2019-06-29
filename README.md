@@ -1,5 +1,3 @@
-# alfred
-
 Alfred, the house master (mayordomo).
 
 [Documentation](https://jrmsdev.github.io/alfred/)
