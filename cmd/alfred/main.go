@@ -4,11 +4,12 @@
 package main
 
 import (
+	"github.com/jrmsdev/alfred/internal/flags"
 	"github.com/jrmsdev/alfred/log"
 )
 
 func main() {
-	log.Init("debug")
+	flags.Parse()
 	log.Debug("start")
 	log.Debug("end")
 }
