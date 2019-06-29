@@ -4,7 +4,7 @@
 package main
 
 import (
-	"github.com/jrmsdev/alfred/lib/log"
+	"github.com/jrmsdev/alfred/log"
 )
 
 func main() {
