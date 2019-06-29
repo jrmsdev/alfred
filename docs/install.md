@@ -1,4 +1,4 @@
 # Install
 
-	$ go get github.com/jrmsdev/alfred/bin/alfred
-	$ go install github.com/jrmsdev/alfred/bin/alfred
+	$ go get -u github.com/jrmsdev/alfred
+	$ go install github.com/jrmsdev/alfred/cmd/...
