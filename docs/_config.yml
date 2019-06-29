@@ -1,6 +1,8 @@
 title: alfred
 description: Alfred, the house master (mayordomo).
-url: "https://jrmsdev.github.io/alfred/"
+
+url: https://jrmsdev.github.io/alfred/
+repository: jrmsdev/alfred
 
 email: jrmsdev@gmail.com
 theme: jekyll-theme-minimal
@@ -8,8 +10,11 @@ theme: jekyll-theme-minimal
 # Exclude from processing.
 exclude:
   - .gitignore
+  - Dockerfile
   - Gemfile
   - Gemfile.lock
+  - docker/build.sh
+  - docker/run.sh
 #   - node_modules
 #   - vendor/bundle/
 #   - vendor/cache/
