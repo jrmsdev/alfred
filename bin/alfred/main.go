@@ -9,7 +9,7 @@ import (
 
 func main() {
 	log.Init("debug")
-	log.Debug("alfred main")
+	log.Debug("start")
 	log.Warnf("warning")
 	log.Errorf("error")
 	log.Print("msg")
