@@ -1,17 +1,13 @@
 // Copyright (c) Jeremías Casteglione <jrmsdev@gmail.com>
 // See LICENSE file.
 
-package main
+package core
 
 import (
-	"github.com/jrmsdev/alfred/internal/core"
-	"github.com/jrmsdev/alfred/internal/flags"
 	"github.com/jrmsdev/alfred/log"
 )
 
-func main() {
-	flags.Parse()
+func Main() {
 	log.Debug("start")
-	core.Main()
 	log.Debug("end")
 }
