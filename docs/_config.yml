@@ -1,10 +1,8 @@
 title: alfred
 description: Alfred, the house master (mayordomo).
-
-url: https://jrmsdev.github.io/alfred/
-repository: jrmsdev/alfred
-
 email: jrmsdev@gmail.com
+
+repository: jrmsdev/alfred
 theme: jekyll-theme-minimal
 
 # Exclude from processing.
