@@ -4,21 +4,15 @@
 package main
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/jrmsdev/alfred/log"
-
 	_ "github.com/jrmsdev/alfred/internal/server/api/routers"
-)
 
-func start() {
-	addr := "127.0.0.1:8180"
-	beego.BConfig.WebConfig.DirectoryIndex = false
-	beego.Run(addr)
-}
+	"github.com/jrmsdev/alfred/internal/server"
+	"github.com/jrmsdev/alfred/log"
+)
 
 func main() {
 	log.Init("debug")
 	log.Debug("start")
-	start()
+	server.Start("127.0.0.1:8180")
 	log.Debug("end")
 }
