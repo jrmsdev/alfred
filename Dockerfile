@@ -29,6 +29,8 @@ COPY docker/sudoers /etc/sudoers.d/alfred
 RUN chmod 440 /etc/sudoers.d/alfred
 
 ENV GOPATH /go
+ENV SRCDIR /go/src/github.com/jrmsdev/alfred
+
 RUN mkdir /go
 RUN chown alfred:alfred /go
 RUN chmod 750 /go
@@ -39,7 +41,6 @@ RUN echo '### alfred setup' >>/home/alfred/.bashrc
 RUN echo 'umask 027' >>/home/alfred/.bashrc
 RUN echo "PS1='docker:\W\$ '" >>/home/alfred/.bashrc
 
-RUN (umask 027 && mkdir -p /go/src/github.com/jrmsdev/alfred)
-WORKDIR /go/src/github.com/jrmsdev/alfred
-
+RUN (umask 027 && mkdir -vp ${SRCDIR})
+WORKDIR ${SRCDIR}
 CMD /bin/bash

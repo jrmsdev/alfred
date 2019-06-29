@@ -34,9 +34,7 @@ COPY ./Gemfile docs/
 COPY ./Gemfile.lock docs/
 RUN sudo chown -R alfred:alfred docs
 
-WORKDIR /go/src/github.com/jrmsdev/alfred/docs
-RUN bash -c 'pwd && ls -lh'
-
+WORKDIR ${SRCDIR}/docs
 RUN bash -c 'source ~/.rvm/scripts/rvm && bundle install'
 
 CMD /bin/bash -c 'source ~/.rvm/scripts/rvm && jekyll serve'
