@@ -14,7 +14,7 @@ RUN apt-get update
 RUN apt-get dist-upgrade -yy --purge
 
 RUN apt-get install -yy --no-install-recommends sudo less golang \
-	golang-golang-x-tools
+	golang-golang-x-tools gcc libc-dev
 
 RUN apt-get clean
 RUN apt-get autoremove -yy --purge
