@@ -30,4 +30,4 @@ ENV SRCDIR /go/src/github.com/jrmsdev/alfred
 RUN mkdir -vp ${SRCDIR}
 
 WORKDIR ${SRCDIR}
-CMD /bin/bash ${SRCDIR}/docker/cmd.sh
+CMD /bin/bash ./docker/cmd.sh

@@ -21,4 +21,4 @@ RUN chmod 440 /etc/sudoers.d/alfred
 
 ENV PAGER less
 
-CMD /bin/bash ${SRCDIR}/docker/cmd.sh login
+CMD /bin/bash ./docker/cmd.sh login

@@ -39,4 +39,5 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN rm -f /var/cache/apt/archives/*.deb
 RUN rm -f /var/cache/apt/*cache.bin
 
-CMD /bin/bash ${SRCDIR}/docker/cmd.sh docsdevel
+WORKDIR ${SRCDIR}
+CMD /bin/bash ./docker/cmd.sh docsdevel

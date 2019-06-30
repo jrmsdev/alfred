@@ -1,22 +1,35 @@
 #!/usr/bin/env bash
 set -eu
+
 SRCDIR=${1:-'.'}
+DOCKER_CMD=${2:-'dispatch'}
+
 NAME='alfred'
 IMAGE='alfred'
+
 if test 'docs' = "${SRCDIR}"; then
-	shift
 	NAME='alfred-docs'
 	IMAGE='alfred:docs'
 elif test 'devel' = "${SRCDIR}"; then
-	shift
 	NAME='alfred-devel'
 	IMAGE='alfred:dev'
 fi
+
 ALFRED_UID=$(id -u)
 ALFRED_GID=$(id -g)
 ALFRED_UMASK=$(umask)
 echo "-- run ${NAME}"
+echo "--     uid ${ALFRED_UID}"
+echo "--     gid ${ALFRED_GID}"
+echo "--     umask ${ALFRED_UMASK}"
+
 source ./docker/network.sh
+
+RUNCMD=''
+if test 'login' = "${DOCKER_CMD}"; then
+	RUNCMD=''
+fi
+
 docker run -it --rm --network ${NETNAME} --name ${NAME} --hostname ${NAME} \
 	-e ALFRED_UID=${ALFRED_UID} \
 	-e ALFRED_GID=${ALFRED_GID} \
@@ -26,6 +39,6 @@ docker run -it --rm --network ${NETNAME} --name ${NAME} --hostname ${NAME} \
 	-p 127.0.0.1:8080:8080 \
 	-p 127.0.0.1:8180:8180 \
 	-v ${PWD}:/go/src/github.com/jrmsdev/alfred \
-	-v ${PWD}:/go/src/github.com/jrmsdev/alfred \
-	${IMAGE} $@
+	${IMAGE} /bin/bash ./docker/cmd.sh login
+
 exit 0
