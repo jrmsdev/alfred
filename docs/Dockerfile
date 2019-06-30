@@ -1,23 +1,18 @@
 FROM alfred
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
-LABEL version="19.6.28"
+LABEL version="19.6.29"
 
 USER root:root
 
-ENV DEBIAN_FRONTEND noninteractive
-
+RUN apt-get clean
 RUN apt-get update
 
-RUN apt-get install -yy --no-install-recommends gnupg2 curl ca-certificates \
-	procps git
+RUN apt-get install -yy --no-install-recommends sudo procps gnupg2 curl git \
+	ca-certificates
 
-RUN apt-get clean
-RUN apt-get autoremove -yy --purge
-
-RUN rm -rf /var/lib/apt/lists/*
-RUN rm -f /var/cache/apt/archives/*.deb
-RUN rm -f /var/cache/apt/*cache.bin
+RUN echo 'alfred ALL=NOPASSWD: ALL' >/etc/sudoers.d/alfred
+RUN chmod 440 /etc/sudoers.d/alfred
 
 USER alfred:alfred
 
@@ -30,11 +25,23 @@ RUN /var/tmp/rvm.setup stable --ruby
 RUN bash -c 'source ~/.rvm/scripts/rvm && ruby --version'
 RUN echo 'source ~/.rvm/scripts/rvm' >>/home/alfred/.bashrc
 
+RUN (umask 027 && mkdir docs)
 COPY ./Gemfile docs/
 COPY ./Gemfile.lock docs/
-RUN sudo chown -R alfred:alfred docs
+RUN sudo chown -vR alfred:alfred docs
 
 WORKDIR ${SRCDIR}/docs
 RUN bash -c 'source ~/.rvm/scripts/rvm && bundle install'
 
-CMD /bin/bash -c 'source ~/.rvm/scripts/rvm && jekyll serve'
+USER root:root
+
+RUN apt-get clean
+RUN apt-get autoremove -yy --purge
+
+RUN rm -rf /var/lib/apt/lists/*
+RUN rm -f /var/cache/apt/archives/*.deb
+RUN rm -f /var/cache/apt/*cache.bin
+
+USER alfred:alfred
+
+CMD /bin/bash -c 'source ~/.rvm/scripts/rvm && jekyll serve -H 0.0.0.0 -P 8080'

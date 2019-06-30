@@ -16,5 +16,7 @@ echo "-- run ${NAME}"
 source ./docker/network.sh
 docker run -it --rm --net=${NETNAME} --name=${NAME} \
 	--add-host 'host.docker.internal:10.0.127.1' \
+	-p 127.0.0.1:8080:8080 \
+	-p 127.0.0.1:8180:8180 \
 	-v ${PWD}:/go/src/github.com/jrmsdev/alfred ${IMAGE} $@
 exit 0
