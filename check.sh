@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 set -eu
-ALFRED_TEST=${ALFRED_TEST:-''}
-go test ${ALFRED_TEST} ./...
+if which dep >/dev/null; then
+	dep check
+fi
+./gofmt.sh
+go vet ./...
+./test.sh
 exit 0
