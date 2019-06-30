@@ -1,3 +1,3 @@
 #!/bin/bash -eu
-./install.sh
+PREFIX=/go ./install.sh
 exec /go/bin/alfred

@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 set -eu
-GOBIN=${GOBIN:-''}
-GOEXE=${GOEXE:-''}
+DESTDIR=${DESTDIR:-''}
+PREFIX=${PREFIX:-'/usr/local'}
+GOBIN=${GOBIN:-"${DESTDIR}${PREFIX}/bin"}
+#echo "-- GOBIN ${GOBIN}"
 export GOBIN
-export GOEXE
 for pkg in $(go list ./cmd/...); do
 	cmd=$(basename ${pkg})
-	echo "-- install ${cmd}"
+	echo "-- install ${GOBIN}/${cmd}"
 	go install -i ${pkg}
 done
 exit 0
