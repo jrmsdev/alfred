@@ -25,20 +25,7 @@ RUN rm -f /var/cache/apt/*cache.bin
 ENV GOPATH /go
 ENV SRCDIR /go/src/github.com/jrmsdev/alfred
 
-RUN (umask 027 && mkdir -vp ${SRCDIR})
-RUN chmod 750 /go
-RUN chown -R alfred:alfred /go
-
-COPY docker/cmd.sh /usr/local/bin/docker-cmd.sh
-RUN chmod -v 555 /usr/local/bin/docker-cmd.sh
-
-RUN chgrp -v alfred /usr/local/bin
-RUN chmod -v 775 /usr/local/bin
-
-USER alfred:alfred
-
-RUN echo '### alfred setup' >>/home/alfred/.bashrc
-RUN echo 'umask 027' >>/home/alfred/.bashrc
+RUN mkdir -vp ${SRCDIR}
 
 WORKDIR ${SRCDIR}
-CMD /usr/local/bin/docker-cmd.sh
+CMD /bin/bash ${SRCDIR}/docker/cmd.sh
