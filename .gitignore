@@ -1,3 +1,4 @@
+*.swp
 build/
 coverage.html
 coverage.out
