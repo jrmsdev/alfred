@@ -14,8 +14,9 @@ elif test 'devel' = "${SRCDIR}"; then
 fi
 echo "-- run ${NAME}"
 source ./docker/network.sh
-docker run -it --rm --net=${NETNAME} --name=${NAME} \
+docker run -it --rm --network ${NETNAME} --name ${NAME} --hostname ${NAME} \
 	--add-host 'host.docker.internal:10.0.127.1' \
+	--network-alias "${NAME}.docker.internal" \
 	-p 127.0.0.1:8080:8080 \
 	-p 127.0.0.1:8180:8180 \
 	-v ${PWD}:/go/src/github.com/jrmsdev/alfred ${IMAGE} $@
