@@ -1,9 +1,7 @@
 FROM alfred
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
-LABEL version="19.6.29"
-
-USER root:root
+LABEL version="19.6.30"
 
 RUN apt-get clean
 RUN apt-get update
@@ -21,7 +19,6 @@ RUN rm -f /var/cache/apt/*cache.bin
 RUN echo 'alfred ALL=NOPASSWD: ALL' >/etc/sudoers.d/alfred
 RUN chmod 440 /etc/sudoers.d/alfred
 
-USER alfred:alfred
 ENV PAGER less
 
-CMD /bin/bash
+CMD /bin/bash ${SRCDIR}/docker/cmd.sh login

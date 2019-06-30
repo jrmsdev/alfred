@@ -1,9 +1,7 @@
 FROM alfred
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
-LABEL version="19.6.29"
-
-USER root:root
+LABEL version="19.6.30"
 
 RUN apt-get clean
 RUN apt-get update
@@ -25,7 +23,6 @@ RUN /var/tmp/rvm.setup stable --ruby
 RUN bash -c 'source ~/.rvm/scripts/rvm && ruby --version'
 RUN echo 'source ~/.rvm/scripts/rvm' >>/home/alfred/.bashrc
 
-RUN (umask 027 && mkdir docs)
 COPY ./Gemfile docs/
 COPY ./Gemfile.lock docs/
 RUN sudo chown -vR alfred:alfred docs
@@ -42,6 +39,4 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN rm -f /var/cache/apt/archives/*.deb
 RUN rm -f /var/cache/apt/*cache.bin
 
-USER alfred:alfred
-
-CMD /bin/bash -c 'source ~/.rvm/scripts/rvm && jekyll serve -H 0.0.0.0 -P 8080'
+CMD /bin/bash ${SRCDIR}/docker/cmd.sh docsdevel

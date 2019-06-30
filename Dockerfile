@@ -1,7 +1,9 @@
 FROM debian:testing-slim
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
-LABEL version="19.6.29"
+LABEL version="19.6.30"
+
+USER root:root
 
 RUN useradd -U -c alfred -d /home/alfred -m -s /bin/bash alfred
 
