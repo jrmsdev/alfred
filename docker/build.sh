@@ -10,7 +10,7 @@ fi
 ALFRED_UID=$(id -u)
 ALFRED_GID=$(id -g)
 echo "-- build ${NAME}"
-docker build --rm --network host -t ${NAME} \
+docker build --rm --network host -t jrmsdev/${NAME} \
 	--add-host 'host.docker.internal:127.0.0.1' \
 	${SRCDIR}
 exit 0

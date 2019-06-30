@@ -39,6 +39,6 @@ docker run -it --rm --network ${NETNAME} --name ${NAME} --hostname ${NAME} \
 	-p 127.0.0.1:8080:8080 \
 	-p 127.0.0.1:8180:8180 \
 	-v ${PWD}:/go/src/github.com/jrmsdev/alfred \
-	${IMAGE} /bin/bash ./docker/cmd.sh login
+	jrmsdev/${IMAGE} /bin/bash ./docker/cmd.sh login
 
 exit 0
