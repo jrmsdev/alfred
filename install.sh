@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 set -eu
+
 DESTDIR=${DESTDIR:-''}
 PREFIX=${PREFIX:-'/usr/local'}
 GOBIN=${GOBIN:-"${DESTDIR}${PREFIX}/bin"}
+
+./build.sh ./cmd/...
+
 #echo "-- GOBIN ${GOBIN}"
 export GOBIN
 for pkg in $(go list ./cmd/...); do
@@ -10,4 +14,5 @@ for pkg in $(go list ./cmd/...); do
 	echo "-- install ${GOBIN}/${cmd}"
 	go install -i ${pkg}
 done
+
 exit 0
