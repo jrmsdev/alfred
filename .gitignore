@@ -1,3 +1,4 @@
 *.swp
 coverage.html
 coverage.out
+version_info.go

@@ -5,9 +5,11 @@ package flags
 
 import (
 	"flag"
+	"fmt"
 	"os"
 	"path/filepath"
 
+	"github.com/jrmsdev/alfred"
 	"github.com/jrmsdev/alfred/log"
 )
 
@@ -17,10 +19,14 @@ type Flags struct {
 	}
 }
 
+var showVersion = false
+var progname = filepath.Base(os.Args[0])
+
 var Config = new(Flags)
-var Options = flag.NewFlagSet(filepath.Base(os.Args[0]), flag.ExitOnError)
+var Options = flag.NewFlagSet(progname, flag.ExitOnError)
 
 func init() {
+	Options.BoolVar(&showVersion, "version", false, "show version and exit")
 	Options.StringVar(&Config.Log.Level, "log", "warn",
 		"set log `level`: debug, warn, error or quiet")
 }
@@ -32,4 +38,8 @@ func parseArgs(args []string) {
 
 func Parse() {
 	parseArgs(os.Args[1:])
+	if showVersion {
+		fmt.Println(alfred.Version(progname))
+		os.Exit(0)
+	}
 }

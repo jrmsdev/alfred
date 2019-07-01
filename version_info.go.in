@@ -1,0 +1,21 @@
+// Copyright (c) Jeremías Casteglione <jrmsdev@gmail.com>
+// See LICENSE file.
+
+package alfred
+
+import (
+	"fmt"
+)
+
+const (
+	sMajor = "{{.VMajor}}"
+	sMinor = "{{.VMinor}}"
+	sPatch = "{{.VPatch}}"
+)
+
+func init() {
+	version = fmt.Sprintf("%s.%s", sMajor, sMinor)
+	if sPatch != "0" {
+		version = fmt.Sprintf("%s.%s", version, sPatch)
+	}
+}

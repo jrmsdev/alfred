@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 set -eu
-gofmt -w -l -s *.go assets cmd internal log
+gofmt -w -l -s *.go *.go.in \
+	assets \
+	cmd \
+	gen \
+	internal \
+	log
 exit 0
