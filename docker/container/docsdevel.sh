@@ -1,9 +1,7 @@
 #!/bin/bash
 
-SRCDIR=${SRCDIR:-'/SRCDIR/notset'}
+SRCDIR=${ALFRED_SRC:-'/SRCDIR/notset'}
 cd ${SRCDIR}/docs
-
-umask ${ALFRED_UMASK}
 
 echo "-- docsdevel"
 echo "--     user $(id -a)"
