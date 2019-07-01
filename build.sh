@@ -17,7 +17,7 @@ for pkg in $(go list ${PKGLIST}); do
 	if echo ${dst} | grep -E '^cmd\/' >/dev/null; then
 		ext=''
 	fi
-	./gen.sh ./${dst}
+	./gen.sh ${dst}
 	dst=${BUILDDIR}/${dst}${ext}
 	echo "-- build ${dst}"
 	go build -i -o ${dst} ${pkg}
