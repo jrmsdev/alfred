@@ -9,7 +9,7 @@ if test "X" = "X${PKGLIST}"; then
 	PKGLIST='./cmd/...'
 fi
 
-go generate generate.go
+./gen.sh
 
 for pkg in $(go list ${PKGLIST}); do
 	dst=${pkg/github\.com\/jrmsdev\/alfred\//}
@@ -17,6 +17,7 @@ for pkg in $(go list ${PKGLIST}); do
 	if echo ${dst} | grep -E '^cmd\/' >/dev/null; then
 		ext=''
 	fi
+	./gen.sh ./${dst}
 	dst=${BUILDDIR}/${dst}${ext}
 	echo "-- build ${dst}"
 	go build -i -o ${dst} ${pkg}
