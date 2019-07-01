@@ -28,6 +28,9 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN rm -f /var/cache/apt/archives/*.deb
 RUN rm -f /var/cache/apt/*cache.bin
 
+RUN chgrp -v alfred /usr/local/bin
+RUN chmod g+w /usr/local/bin
+
 USER alfred:alfred
 
 ENV GOPATH /home/alfred/go
