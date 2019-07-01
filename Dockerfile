@@ -45,4 +45,4 @@ WORKDIR ${ALFRED_SRC}
 RUN go env | sort
 RUN go version
 
-ENTRYPOINT ./docker/container/dispatch.sh
+CMD ./docker/container/dispatch.sh

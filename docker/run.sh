@@ -13,7 +13,8 @@ elif test 'devel' = "${SRCDIR}"; then
 	NAME='alfred-devel'
 	IMAGE='alfred:dev'
 fi
-if test '.' != "${SRCDIR}"; then
+
+if test 'alfred' != ${NAME}; then
 	shift
 fi
 
@@ -26,6 +27,6 @@ docker run -it --rm --network ${NETNAME} --name ${NAME} --hostname ${NAME} \
 	-p 127.0.0.1:8080:8080 \
 	-p 127.0.0.1:8180:8180 \
 	-v ${PWD}:/home/alfred/go/src/github.com/jrmsdev/alfred \
-	jrmsdev/${IMAGE}
+	jrmsdev/${IMAGE} $@
 
 exit 0

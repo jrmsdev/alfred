@@ -27,4 +27,4 @@ RUN chmod 440 /etc/sudoers.d/alfred
 ENV PAGER less
 
 USER alfred:alfred
-ENTRYPOINT exec /bin/bash -i -l
+CMD exec /bin/bash -i -l
