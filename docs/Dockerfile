@@ -1,4 +1,4 @@
-FROM alfred
+FROM jrmsdev/alfred
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
 LABEL version="19.6.30"
