@@ -28,6 +28,9 @@ ENV GOPATH /go
 ENV SRCDIR /go/src/github.com/jrmsdev/alfred
 
 RUN mkdir -vp ${SRCDIR}
-
 WORKDIR ${SRCDIR}
-CMD /bin/bash ./docker/cmd.sh
+
+RUN echo 'source ${SRCDIR}/docker/container/loginrc' >>/home/alfred/.bashrc
+
+ENTRYPOINT ["./docker/container/entrypoint.sh"]
+CMD ["dispatch"]

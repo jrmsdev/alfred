@@ -2,7 +2,7 @@
 set -eu
 
 SRCDIR=${1:-'.'}
-DOCKER_CMD=${2:-'dispatch'}
+DOCKER_CMD=${2:-""}
 
 NAME='alfred'
 IMAGE='alfred'
@@ -23,7 +23,7 @@ echo "--     uid ${ALFRED_UID}"
 echo "--     gid ${ALFRED_GID}"
 echo "--     umask ${ALFRED_UMASK}"
 
-source ./docker/network.sh
+source ./docker/networkrc
 
 docker run -it --rm --network ${NETNAME} --name ${NAME} --hostname ${NAME} \
 	-e ALFRED_UID=${ALFRED_UID} \
@@ -34,6 +34,6 @@ docker run -it --rm --network ${NETNAME} --name ${NAME} --hostname ${NAME} \
 	-p 127.0.0.1:8080:8080 \
 	-p 127.0.0.1:8180:8180 \
 	-v ${PWD}:/go/src/github.com/jrmsdev/alfred \
-	jrmsdev/${IMAGE} /bin/bash ./docker/cmd.sh ${DOCKER_CMD}
+	jrmsdev/${IMAGE} ${DOCKER_CMD}
 
 exit 0

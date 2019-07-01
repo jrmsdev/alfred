@@ -40,4 +40,4 @@ RUN rm -f /var/cache/apt/archives/*.deb
 RUN rm -f /var/cache/apt/*cache.bin
 
 WORKDIR ${SRCDIR}
-CMD /bin/bash ./docker/cmd.sh docsdevel
+CMD ["docsdevel"]

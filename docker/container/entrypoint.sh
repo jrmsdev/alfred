@@ -27,5 +27,4 @@ chmod 0775 /usr/local/bin
 
 go version
 
-su -c "/bin/bash -l ${SRCDIR}/docker/${DOCKER_CMD}.sh" alfred
-exit 0
+DOCKER_CMD=${DOCKER_CMD} su -c "/bin/bash -i -l" alfred
