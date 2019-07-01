@@ -1,11 +1,15 @@
 FROM debian:testing-slim
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
-LABEL version="19.6.30"
+LABEL version="19.7.1"
 
 USER root:root
 
-RUN useradd -U -c alfred -d /home/alfred -m -s /bin/bash alfred
+ARG ALFRED_UID
+ARG ALFRED_GID
+
+RUN groupadd -g ${ALFRED_GID} alfred
+RUN useradd -c alfred -m -d /home/alfred -g alfred -s /bin/bash -u ${ALFRED_UID} alfred
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -24,13 +28,15 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN rm -f /var/cache/apt/archives/*.deb
 RUN rm -f /var/cache/apt/*cache.bin
 
-ENV GOPATH /go
-ENV SRCDIR /go/src/github.com/jrmsdev/alfred
+USER alfred:alfred
 
-RUN mkdir -vp ${SRCDIR}
-WORKDIR ${SRCDIR}
+ENV GOPATH /home/alfred/go
+ENV ALFRED_SRC ${GOPATH}/src/github.com/jrmsdev/alfred
 
-RUN echo 'source ${SRCDIR}/docker/container/loginrc' >>/home/alfred/.bashrc
+RUN mkdir -vp ${ALFRED_SRC}
+WORKDIR ${ALFRED_SRC}
 
-ENTRYPOINT ["./docker/container/entrypoint.sh"]
-CMD ["dispatch"]
+RUN go version
+RUN go env | sort
+
+ENTRYPOINT ["./docker/container/dispatch.sh"]

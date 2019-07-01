@@ -1,15 +1,14 @@
 #!/bin/bash
 set -eu
 
-SRCDIR=${SRCDIR:-'/SRCDIR/notset'}
+SRCDIR=${ALFRED_SRC:-'/SRCDIR/notset'}
 cd ${SRCDIR}
-
-umask ${ALFRED_UMASK}
 
 echo "-- dispatch"
 echo "--     user $(id -a)"
-echo "--     umask $(umask)"
 echo "--     workdir $(pwd)"
 
-./install.sh
-exec /usr/local/bin/alfred $@
+go install ./devel/alfred-install
+${GOPATH}/bin/alfred-install
+
+exec /usr/local/bin/alfred-core $@
