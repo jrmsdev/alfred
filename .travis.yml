@@ -3,8 +3,9 @@ language: go
 os: linux
 
 go:
-  - "1.x"
-  - "1.11.x"
+  - master
+  - 1.12.x
+  - 1.11.x
 
 git:
   depth: 5
@@ -17,11 +18,11 @@ branches:
 matrix:
   include:
     - os: osx
-      go: "1.x"
+      go: 1.x
     - os: windows
-      go: "1.x"
+      go: 1.x
     - os: linux
-      go: "1.x"
+      go: 1.x
       env:
         - ALFRED_TEST="-race"
 
