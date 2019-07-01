@@ -25,11 +25,6 @@ echo "--     umask ${ALFRED_UMASK}"
 
 source ./docker/network.sh
 
-RUNCMD=''
-if test 'login' = "${DOCKER_CMD}"; then
-	RUNCMD=''
-fi
-
 docker run -it --rm --network ${NETNAME} --name ${NAME} --hostname ${NAME} \
 	-e ALFRED_UID=${ALFRED_UID} \
 	-e ALFRED_GID=${ALFRED_GID} \
@@ -39,6 +34,6 @@ docker run -it --rm --network ${NETNAME} --name ${NAME} --hostname ${NAME} \
 	-p 127.0.0.1:8080:8080 \
 	-p 127.0.0.1:8180:8180 \
 	-v ${PWD}:/go/src/github.com/jrmsdev/alfred \
-	jrmsdev/${IMAGE} /bin/bash ./docker/cmd.sh login
+	jrmsdev/${IMAGE} /bin/bash ./docker/cmd.sh ${DOCKER_CMD}
 
 exit 0

@@ -25,5 +25,7 @@ chown alfred:alfred ${GOPATH}
 chgrp alfred /usr/local/bin
 chmod 0775 /usr/local/bin
 
+go version
+
 su -c "/bin/bash -l ${SRCDIR}/docker/${DOCKER_CMD}.sh" alfred
 exit 0
