@@ -14,6 +14,7 @@ RUN useradd -c alfred -m -d /home/alfred -g alfred -s /bin/bash -u ${ALFRED_UID}
 ENV DEBIAN_FRONTEND noninteractive
 
 COPY docker/apt-proxy.conf /etc/apt/apt.conf.d/02proxy
+RUN chmod 0644 /etc/apt/apt.conf.d/02proxy
 
 RUN apt-get clean
 RUN apt-get update
@@ -29,7 +30,9 @@ RUN rm -f /var/cache/apt/archives/*.deb
 RUN rm -f /var/cache/apt/*cache.bin
 
 RUN chgrp -v alfred /usr/local/bin
-RUN chmod g+w /usr/local/bin
+RUN chmod -v g+w /usr/local/bin
+
+RUN chmod -v 0750 /home/alfred
 
 USER alfred:alfred
 
@@ -39,7 +42,7 @@ ENV ALFRED_SRC ${GOPATH}/src/github.com/jrmsdev/alfred
 RUN mkdir -vp ${ALFRED_SRC}
 WORKDIR ${ALFRED_SRC}
 
-RUN go version
 RUN go env | sort
+RUN go version
 
-ENTRYPOINT ["./docker/container/dispatch.sh"]
+ENTRYPOINT ./docker/container/dispatch.sh

@@ -1,7 +1,12 @@
 FROM jrmsdev/alfred
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
-LABEL version="19.6.30"
+LABEL version="19.7.1"
+
+USER root:root
+
+ARG ALFRED_UID
+ARG ALFRED_GID
 
 RUN apt-get clean
 RUN apt-get update
@@ -21,4 +26,5 @@ RUN chmod 440 /etc/sudoers.d/alfred
 
 ENV PAGER less
 
-CMD ["login"]
+USER alfred:alfred
+ENTRYPOINT exec /bin/bash -i -l
