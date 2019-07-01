@@ -43,9 +43,10 @@ func main() {
 func cmdrun(name string, arg ...string) {
 	cmd := exec.Command(name, arg...)
 	printf("  %s\n", name)
-	err := cmd.Run()
+	out, err := cmd.CombinedOutput()
 	if err != nil {
 		printf("%s\n", err)
+		printf("%s", out)
 		os.Exit(2)
 	}
 }
