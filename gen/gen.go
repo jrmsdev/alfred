@@ -25,7 +25,7 @@ func Template(name string, data *map[string]string) {
 	if strings.HasSuffix(name, ".in") {
 		dstfn = strings.Replace(dstfn, ".in", "", 1)
 	}
-	fmt.Printf("-- generate %s\n", dstfn)
+	fmt.Printf("--   %s\n", dstfn)
 
 	tpl := template.New(name)
 

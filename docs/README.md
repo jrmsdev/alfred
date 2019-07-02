@@ -1,4 +1,4 @@
 # Documentation
 
-* [Install](./install)
-* [Devel](./devel)
+* [Install](./install.md)
+* [Devel](./devel.md)
