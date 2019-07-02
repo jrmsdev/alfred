@@ -4,12 +4,11 @@
 package web
 
 import (
-	"sync"
-
+	"github.com/jrmsdev/alfred/internal/worker"
 	"github.com/jrmsdev/alfred/log"
 )
 
-func Start(wg *sync.WaitGroup) {
+func Start(wg *worker.Group) {
 	log.Debug("web worker")
 	defer wg.Done()
 }

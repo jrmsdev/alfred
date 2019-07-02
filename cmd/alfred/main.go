@@ -7,11 +7,15 @@ import (
 	"os"
 
 	"github.com/jrmsdev/alfred/internal/flags"
+	"github.com/jrmsdev/alfred/internal/worker"
 	"github.com/jrmsdev/alfred/log"
 )
 
+var wg *worker.Group
+
 func main() {
 	rc := 0
+	wg = new(worker.Group)
 	flags.Parse("alfred")
 	log.Debug("init")
 	action := flags.Options.Arg(0)

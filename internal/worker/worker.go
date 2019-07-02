@@ -3,6 +3,12 @@
 
 package worker
 
-//~ import (
+import (
+	"sync"
+
 	//~ "github.com/jrmsdev/alfred/log"
-//~ )
+)
+
+type Group struct {
+	sync.WaitGroup
+}
