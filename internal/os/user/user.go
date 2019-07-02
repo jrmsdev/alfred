@@ -33,7 +33,7 @@ func init() {
 		cur.Home = os.Getenv("HOME")
 	}
 	if cur.Home == "" {
-		cur.Home = fpath.FromSlash("/var/empty")
+		cur.Home = fpath.FromSlash("/empty/home")
 	}
 }
 
@@ -50,6 +50,5 @@ func Name() string {
 }
 
 func Home(args ...string) string {
-	println("HOME", cur.Home)
 	return fpath.Join(cur.Home, fpath.Join(args...))
 }

@@ -14,7 +14,10 @@ type alfredConfig struct {
 		Level string
 		Dir   string
 	}
+	Dir string
 	RunDir string
+	DataDir string
+	CacheDir string
 }
 
 var Config *alfredConfig
@@ -23,8 +26,14 @@ func init() {
 	Config = new(alfredConfig)
 	Config.Log.Dir = getenv("ALFRED_LOGDIR",
 		user.Home(".local", "alfred", "log"))
+	Config.Dir = getenv("ALFRED_CFGDIR",
+		user.Home(".config", "alfred"))
 	Config.RunDir = getenv("ALFRED_RUNDIR",
 		user.Home(".local", "alfred", "run"))
+	Config.DataDir = getenv("ALFRED_DATADIR",
+		user.Home(".local", "alfred", "data"))
+	Config.CacheDir = getenv("ALFRED_CACHEDIR",
+		user.Home(".cache", "alfred"))
 }
 
 func getenv(varname, defval string) string {
