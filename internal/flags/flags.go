@@ -27,8 +27,14 @@ func Parse(progname string) {
 func newOptions(progname string) {
 	Options = flag.NewFlagSet(progname, flag.ExitOnError)
 	Options.BoolVar(&showVersion, "version", false, "show version and exit")
+
 	Options.StringVar(&alfred.Config.Log.Level, "log", "warn",
 		"set log `level`: debug, warn, error or quiet")
+	Options.StringVar(&alfred.Config.Log.Dir, "logdir", alfred.Config.Log.Dir,
+		"set log `directory` path")
+
+	Options.StringVar(&alfred.Config.RunDir, "rundir", alfred.Config.RunDir,
+		"set runtime `directory` path")
 }
 
 func parseArgs(args []string) {
