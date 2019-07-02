@@ -1,0 +1,6 @@
+# alfred default env
+ALFRED_RUNDIR=/run/alfred
+ALFRED_VARDIR=/var/lib/alfred
+ALFRED_CACHEDIR=/var/cache/alfred
+ALFRED_LOGDIR=/var/log/alfred
+ALFRED_CFGDIR=/etc/alfred
