@@ -24,8 +24,11 @@ var Config *alfredConfig
 
 func init() {
 	Config = new(alfredConfig)
+
+	Config.Log.Level = getenv("ALFRED_LOG", "default")
 	Config.Log.Dir = getenv("ALFRED_LOGDIR",
 		user.Home(".local", "alfred", "log"))
+
 	Config.Dir = getenv("ALFRED_CFGDIR",
 		user.Home(".config", "alfred"))
 	Config.RunDir = getenv("ALFRED_RUNDIR",

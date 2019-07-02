@@ -32,7 +32,8 @@ func newOptions(progname string) {
 	Options.BoolVar(&showVersion, "version", false, "show version and exit")
 
 	Options.StringVar(&alfred.Config.Log.Level, "log",
-		"default", "set log `level`: debug, warn, error or quiet")
+		alfred.Config.Log.Level,
+		"set log `level`: default, debug, warn, error or quiet")
 
 	Options.StringVar(&alfred.Config.Log.Dir, "logdir",
 		alfred.Config.Log.Dir, "set log directory `path`")
