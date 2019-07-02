@@ -107,13 +107,6 @@ func Init(level string) {
 		l.Format = mfmt
 		l.Formatf = mfmtf
 	}
-	//~ Debug("level %s", level)
-	//~ Debug("stderr %s", os.Stderr.Name())
-	//~ if st, err := os.Stderr.Stat(); err == nil {
-	//~ Debug("stderr %s", st.Mode())
-	//~ } else {
-	//~ Error(err)
-	//~ }
 }
 
 func getShortIdx() int {

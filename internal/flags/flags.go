@@ -17,11 +17,13 @@ var Options *flag.FlagSet
 
 func Parse(progname string) {
 	newOptions(progname)
-	parseArgs(os.Args[1:])
+	Options.Parse(os.Args[1:])
+	log.Init(alfred.Config.Log.Level)
 	if showVersion {
 		fmt.Println(alfred.Version(progname))
 		os.Exit(0)
 	}
+	log.Print(alfred.Version(progname))
 }
 
 func newOptions(progname string) {
@@ -30,7 +32,7 @@ func newOptions(progname string) {
 	Options.BoolVar(&showVersion, "version", false, "show version and exit")
 
 	Options.StringVar(&alfred.Config.Log.Level, "log",
-		"warn", "set log `level`: debug, warn, error or quiet")
+		"default", "set log `level`: debug, warn, error or quiet")
 
 	Options.StringVar(&alfred.Config.Log.Dir, "logdir",
 		alfred.Config.Log.Dir, "set log directory `path`")
@@ -46,9 +48,4 @@ func newOptions(progname string) {
 
 	Options.StringVar(&alfred.Config.CacheDir, "cachedir",
 		alfred.Config.CacheDir, "set cache directory `path`")
-}
-
-func parseArgs(args []string) {
-	Options.Parse(args)
-	log.Init(alfred.Config.Log.Level)
 }
