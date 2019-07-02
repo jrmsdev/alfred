@@ -4,7 +4,6 @@ gofmt -w -l -s *.go *.go.in \
 	assets \
 	cmd \
 	devel \
-	gen \
 	internal \
 	log
 exit 0
