@@ -11,5 +11,4 @@ echo "--     workdir $(pwd)"
 go install ./devel/alfred-install
 ${GOPATH}/bin/alfred-install
 
-/usr/local/bin/alfred-core -version
-exec /usr/local/bin/alfred-core $@
+exec /usr/local/bin/alfred -version

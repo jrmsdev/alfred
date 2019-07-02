@@ -4,5 +4,5 @@ BUILDDIR=${GOPATH}/pkg/alfred/build
 go clean -i -cache -testcache ./...
 rm -f coverage.out coverage.html \
 	version_info.go
-rm -rf ${BUILDDIR}
+rm -rf ${BUILDDIR} ${BUILDDIR}.*
 exit 0

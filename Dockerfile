@@ -32,6 +32,9 @@ RUN rm -f /var/cache/apt/*cache.bin
 RUN chgrp -v alfred /usr/local/bin
 RUN chmod -v g+w /usr/local/bin
 
+RUN chgrp -v alfred /usr/local/lib
+RUN chmod -v g+w /usr/local/lib
+
 RUN chmod -v 0750 /home/alfred
 
 USER alfred:alfred

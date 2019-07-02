@@ -10,16 +10,16 @@ DESTDIR=${DESTDIR:-''}
 PREFIX=${PREFIX:-'/usr/local'}
 
 BINDIR=${DESTDIR}${PREFIX}/bin
-LIBEXECDIR=${DESTDIR}${PREFIX}/libexec/alfred
+LIBDIR=${DESTDIR}${PREFIX}/lib/alfred
 
-#~ mkdir -p ${BINDIR} ${LIBEXECDIR}
+mkdir -p -m 0755 ${BINDIR} ${LIBDIR}
 
 for pkg in $(cat build.pkg); do
 	src=${BUILDDIR}/${pkg}
 	if ! test -s ${src}; then
 		echo "E: ${src} file not found, build failed!?" >&2
 	fi
-	dstdir=${LIBEXECDIR}
+	dstdir=${LIBDIR}
 	if echo ${pkg} | grep -E '^cmd\/' >/dev/null; then
 		dstdir=${BINDIR}
 	fi
