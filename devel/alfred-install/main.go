@@ -24,17 +24,15 @@ func main() {
 		printf("E: could not get GOPATH env var\n")
 		os.Exit(1)
 	}
+
 	srcdir := fpath.Join(gopath, "src", "github.com", "jrmsdev", "alfred")
-
-	printf("  GOPATH %s\n", gopath)
-	printf("  source dir %s\n", srcdir)
-
 	err := os.Chdir(srcdir)
 	if err != nil {
 		printf("E: %s\n", err)
 		os.Exit(1)
 	}
 
+	printf("  source dir %s\n", srcdir)
 	cmdrun("./install.sh")
 
 	printf("done\n")
