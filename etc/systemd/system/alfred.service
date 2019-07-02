@@ -5,22 +5,16 @@ After=network.target
 AssertFileIsExecutable=/usr/local/bin/alfred
 
 [Service]
-Type=oneshot
-GuessMainPID=no
-RestartSec=300ms
-TimeoutSec=10s
+Type=simple
 Restart=on-failure
 SuccessExitStatus=0
 RootDirectory=/
-RemainAfterExit=yes
 User=alfred
 Group=alfred
-WorkingDirectory=~
-PIDFile=/var/lib/alfred/core.pid
+EnvironmentFile=/etc/default/alfred
 ExecStart=/usr/local/bin/alfred start
 ExecStop=/usr/local/bin/alfred stop
 ExecReload=/usr/local/bin/alfred reload
-EnvironmentFile=/etc/default/alfred
 
 [Install]
 WantedBy=multi-user.target

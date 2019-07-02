@@ -14,9 +14,9 @@ type alfredConfig struct {
 		Level string
 		Dir   string
 	}
-	Dir string
-	RunDir string
-	DataDir string
+	Dir      string
+	RunDir   string
+	DataDir  string
 	CacheDir string
 }
 
