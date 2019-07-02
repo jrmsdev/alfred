@@ -1,7 +1,7 @@
 // Copyright (c) Jeremías Casteglione <jrmsdev@gmail.com>
 // See LICENSE file.
 
-package core
+package web
 
 import (
 	"sync"
@@ -10,6 +10,6 @@ import (
 )
 
 func Start(wg *sync.WaitGroup) {
-	log.Debug("core worker")
+	log.Debug("web worker")
 	defer wg.Done()
 }

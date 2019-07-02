@@ -6,23 +6,14 @@ package main
 import (
 	"sync"
 
-	"github.com/jrmsdev/alfred/log"
+	"github.com/jrmsdev/alfred/internal/core"
+	"github.com/jrmsdev/alfred/internal/web"
 )
 
 func start() int {
 	wg := new(sync.WaitGroup)
 	wg.Add(2)
-	core(wg)
-	web(wg)
+	core.Start(wg)
+	web.Start(wg)
 	return 0
-}
-
-func core(wg *sync.WaitGroup) {
-	log.Debug("core worker")
-	defer wg.Done()
-}
-
-func web(wg *sync.WaitGroup) {
-	log.Debug("web worker")
-	defer wg.Done()
 }
