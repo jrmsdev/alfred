@@ -5,5 +5,6 @@ gofmt -w -l -s *.go *.go.in \
 	cmd \
 	devel \
 	internal \
+	libexec \
 	log
 exit 0
