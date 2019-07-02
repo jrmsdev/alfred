@@ -4,7 +4,7 @@
 package main
 
 import (
-	"github.com/jrmsdev/alfred/internal/gen"
+	"github.com/jrmsdev/alfred/internal/_gen"
 )
 
 var data = map[string]string{
