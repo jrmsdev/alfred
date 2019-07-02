@@ -1,7 +1,7 @@
 FROM jrmsdev/alfred
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
-LABEL version="19.7.1"
+LABEL version="19.7.2"
 
 USER root:root
 

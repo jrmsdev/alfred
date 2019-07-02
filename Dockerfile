@@ -1,7 +1,7 @@
-FROM debian:testing-slim
+FROM jrmsdev/debian:testing
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
-LABEL version="19.7.1"
+LABEL version="19.7.2"
 
 USER root:root
 
@@ -37,13 +37,15 @@ RUN chmod -v g+w /usr/local/lib
 
 RUN chmod -v 0750 /home/alfred
 
-USER alfred:alfred
-
 ENV GOPATH /home/alfred
 ENV ALFRED_SRC ${GOPATH}/src/github.com/jrmsdev/alfred
 
 RUN mkdir -vp ${ALFRED_SRC}
+RUN chown -vR alfred:alfred ${GOPATH}/src
+
 WORKDIR ${ALFRED_SRC}
+
+USER alfred:alfred
 
 RUN go env | sort
 RUN go version
