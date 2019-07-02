@@ -12,8 +12,10 @@ import (
 )
 
 func main() {
+	rc := 0
 	flags.Parse("alfred-core")
-	log.Debug("start")
+	log.Debug("init")
 	server.Start("127.0.0.1:21600")
-	log.Debug("end")
+	log.Debug("exit(%d)", rc)
+	os.Exit(rc)
 }

@@ -11,15 +11,18 @@ import (
 
 func start() int {
 	wg := new(sync.WaitGroup)
-	log.Debug("start")
 	wg.Add(2)
-	worker("alfred-core", wg)
-	worker("alfred-web", wg)
-	log.Debug("end")
+	core(wg)
+	web(wg)
 	return 0
 }
 
-func worker(name string, wg *sync.WaitGroup) {
-	log.Debug("%s worker", name)
+func core(wg *sync.WaitGroup) {
+	log.Debug("core worker")
+	defer wg.Done()
+}
+
+func web(wg *sync.WaitGroup) {
+	log.Debug("web worker")
 	defer wg.Done()
 }

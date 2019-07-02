@@ -14,9 +14,12 @@ func main() {
 	rc := 0
 	flags.Parse("alfred")
 	log.Debug("init")
-	action := flags.Options.Arg(1)
+	action := flags.Options.Arg(0)
 	if action == "" || action == "start" {
 		rc = start()
+	} else {
+		log.Errorf("invalid action %s", action)
+		rc = 1
 	}
 	log.Debug("exit(%d)", rc)
 	os.Exit(rc)

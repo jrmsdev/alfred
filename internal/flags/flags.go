@@ -5,7 +5,6 @@ package flags
 
 import (
 	"flag"
-	"fmt"
 	"os"
 
 	"github.com/jrmsdev/alfred"
@@ -14,17 +13,6 @@ import (
 
 var showVersion = false
 var Options *flag.FlagSet
-
-func Parse(progname string) {
-	newOptions(progname)
-	Options.Parse(os.Args[1:])
-	log.Init(alfred.Config.Log.Level)
-	if showVersion {
-		fmt.Println(alfred.Version(progname))
-		os.Exit(0)
-	}
-	log.Print(alfred.Version(progname))
-}
 
 func newOptions(progname string) {
 	Options = flag.NewFlagSet(progname, flag.ExitOnError)
@@ -49,4 +37,15 @@ func newOptions(progname string) {
 
 	Options.StringVar(&alfred.Config.CacheDir, "cachedir",
 		alfred.Config.CacheDir, "set cache directory `path`")
+}
+
+func Parse(progname string) {
+	newOptions(progname)
+	Options.Parse(os.Args[1:])
+	log.Init(alfred.Config.Log.Level)
+	if showVersion {
+		log.Print(alfred.Version(progname))
+		os.Exit(0)
+	}
+	log.Print(alfred.Version(progname))
 }

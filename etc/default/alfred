@@ -1,4 +1,5 @@
 # alfred default env
+ALFRED_LOG='default'
 ALFRED_LOGDIR=/var/log/alfred
 ALFRED_CFGDIR=/etc/alfred
 ALFRED_RUNDIR=/run/alfred
