@@ -27,7 +27,7 @@ docker run -it --rm --network ${NETNAME} --name ${NAME} --hostname ${NAME} \
 	${PUBLISH} \
 	--add-host 'host.docker.internal:10.0.127.1' \
 	--network-alias "${NAME}.docker.internal" \
-	-v ${PWD}:/home/alfred/go/src/github.com/jrmsdev/alfred \
+	-v ${PWD}:/home/alfred/src/github.com/jrmsdev/alfred \
 	jrmsdev/${IMAGE} $@
 
 exit 0

@@ -39,7 +39,7 @@ RUN chmod -v 0750 /home/alfred
 
 USER alfred:alfred
 
-ENV GOPATH /home/alfred/go
+ENV GOPATH /home/alfred
 ENV ALFRED_SRC ${GOPATH}/src/github.com/jrmsdev/alfred
 
 RUN mkdir -vp ${ALFRED_SRC}
