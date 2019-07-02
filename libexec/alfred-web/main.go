@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	flags.Parse()
+	flags.Parse("alfred-web")
 	log.Debug("start")
 	server.Start("127.0.0.1:21680")
 	log.Debug("end")

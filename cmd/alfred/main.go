@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	flags.Parse()
+	flags.Parse("alfred")
 	log.Debug("start")
 	log.Debug("end")
 }
