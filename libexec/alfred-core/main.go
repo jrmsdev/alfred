@@ -4,6 +4,8 @@
 package main
 
 import (
+	"os"
+
 	_ "github.com/jrmsdev/alfred/internal/server/api/routers"
 
 	"github.com/jrmsdev/alfred/internal/flags"
