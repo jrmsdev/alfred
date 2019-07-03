@@ -6,9 +6,17 @@ package worker
 import (
 	"sync"
 
+	"github.com/jrmsdev/alfred/internal/core"
+	"github.com/jrmsdev/alfred/internal/web"
 	//~ "github.com/jrmsdev/alfred/log"
 )
 
-type Group struct {
-	sync.WaitGroup
+var Group = new(sync.WaitGroup)
+
+func Start(name string) error {
+	Group.Add(1)
+	if name == "web" {
+		return web.Start(Group)
+	}
+	return core.Start(Group)
 }

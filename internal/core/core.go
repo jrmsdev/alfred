@@ -4,11 +4,13 @@
 package core
 
 import (
-	"github.com/jrmsdev/alfred/internal/worker"
+	"sync"
+
 	"github.com/jrmsdev/alfred/log"
 )
 
-func Start(wg *worker.Group) {
+func Start(wg *sync.WaitGroup) error {
 	log.Debug("core worker")
 	defer wg.Done()
+	return nil
 }

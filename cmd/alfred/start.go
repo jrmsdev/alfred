@@ -4,13 +4,12 @@
 package main
 
 import (
-	"github.com/jrmsdev/alfred/internal/core"
-	"github.com/jrmsdev/alfred/internal/web"
+	"github.com/jrmsdev/alfred/internal/worker"
 )
 
 func start() int {
-	wg.Add(2)
-	core.Start(wg)
-	web.Start(wg)
+	check(worker.Start("core"))
+	check(worker.Start("web"))
+	worker.Group.Wait()
 	return 0
 }
