@@ -5,7 +5,7 @@ SRCDIR=${1:-'.'}
 
 NAME='alfred'
 IMAGE='alfred'
-PUBLISH='-p 127.0.0.1:21600:21600 -p 127.0.0.1:21680:21680'
+PUBLISH='-p 127.0.0.1:27719:27719 -p 127.0.0.1:21680:21680'
 
 if test 'docs' = "${SRCDIR}"; then
 	NAME='alfred-docs'

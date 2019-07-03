@@ -37,6 +37,12 @@ func newOptions(progname string) {
 
 	Options.StringVar(&alfred.Config.CacheDir, "cachedir",
 		alfred.Config.CacheDir, "set cache directory `path`")
+
+	Options.StringVar(&alfred.Config.Core.Addr, "core.addr",
+		alfred.Config.Core.Addr, "set core bind `address`")
+
+	Options.StringVar(&alfred.Config.Web.Addr, "web.addr",
+		alfred.Config.Web.Addr, "set web bind `address`")
 }
 
 func Parse(progname string) {

@@ -1,7 +1,7 @@
-FROM jrmsdev/debian:testing
+FROM jrmsdev/golang:testing
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
-LABEL version="19.7.2"
+LABEL version="19.7.3"
 
 USER root:root
 
@@ -19,8 +19,6 @@ RUN chmod 0644 /etc/apt/apt.conf.d/02proxy
 RUN apt-get clean
 RUN apt-get update
 RUN apt-get dist-upgrade -yy --purge
-
-RUN apt-get install -yy --no-install-recommends golang
 
 RUN apt-get clean
 RUN apt-get autoremove -yy --purge
@@ -46,6 +44,9 @@ RUN chown -vR alfred:alfred ${GOPATH}/src
 WORKDIR ${ALFRED_SRC}
 
 USER alfred:alfred
+
+ENV ALFRED_CORE '127.0.0.1:27719'
+ENV ALFRED_WEB 'alfred:21680'
 
 RUN go env | sort
 RUN go version

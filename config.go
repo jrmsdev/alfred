@@ -18,6 +18,12 @@ type alfredConfig struct {
 	RunDir   string
 	DataDir  string
 	CacheDir string
+	Core struct {
+		Addr string
+	}
+	Web struct {
+		Addr string
+	}
 }
 
 var Config *alfredConfig
@@ -37,6 +43,9 @@ func init() {
 		user.Home(".local", "alfred", "data"))
 	Config.CacheDir = getenv("ALFRED_CACHEDIR",
 		user.Home(".cache", "alfred"))
+
+	Config.Core.Addr = getenv("ALFRED_CORE", "127.0.0.1:27719")
+	Config.Web.Addr = getenv("ALFRED_WEB", "127.0.0.1:21680")
 }
 
 func getenv(varname, defval string) string {

@@ -1,4 +1,6 @@
 # alfred default env
+ALFRED_CORE='127.0.0.1:27719'
+ALFRED_WEB='127.0.0.1:21680'
 ALFRED_LOG='default'
 ALFRED_LOGDIR=/var/log/alfred
 ALFRED_CFGDIR=/etc/alfred
