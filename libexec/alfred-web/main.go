@@ -8,10 +8,10 @@ import (
 
 	_ "github.com/jrmsdev/alfred/internal/server/web/routers"
 
+	"github.com/jrmsdev/alfred"
 	"github.com/jrmsdev/alfred/internal/flags"
 	"github.com/jrmsdev/alfred/internal/server"
 	"github.com/jrmsdev/alfred/log"
-	"github.com/jrmsdev/alfred"
 )
 
 func main() {

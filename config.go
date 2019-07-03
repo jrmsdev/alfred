@@ -14,16 +14,16 @@ type alfredConfig struct {
 		Level string
 		Dir   string
 	}
-	Dir      string
-	RunDir   string
-	DataDir  string
-	CacheDir string
 	Core struct {
 		Addr string
 	}
 	Web struct {
 		Addr string
 	}
+	Dir      string
+	RunDir   string
+	DataDir  string
+	CacheDir string
 }
 
 var Config *alfredConfig
