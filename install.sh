@@ -12,18 +12,20 @@ PREFIX=${PREFIX:-'/usr/local'}
 BINDIR=${DESTDIR}${PREFIX}/bin
 LIBDIR=${DESTDIR}${PREFIX}/lib/alfred
 
-mkdir -p -m 0755 ${BINDIR} ${LIBDIR}
+mkdir -p -m 0755 ${BINDIR} ${LIBDIR}/bin
 
 for pkg in $(cat build.pkg); do
 	src=${BUILDDIR}/${pkg}
 	if ! test -s ${src}; then
 		echo "E: ${src} file not found, build failed!?" >&2
 	fi
-	dstdir=${LIBDIR}
-	if echo ${pkg} | grep -E '^cmd\/' >/dev/null; then
-		dstdir=${BINDIR}
+	dstdir=${BINDIR}
+	dstname=$(basename ${pkg})
+	if echo ${pkg} | grep -E '^internal\/bin\/' >/dev/null; then
+		dstdir=${LIBDIR}
+		dstname=bin/${dstname}
 	fi
-	dst=${dstdir}/$(basename ${pkg})
+	dst=${dstdir}/${dstname}
 	echo "-- install ${dst}"
 	install -m 0755 ${src} ${dst}
 done
