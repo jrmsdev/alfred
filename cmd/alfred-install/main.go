@@ -4,21 +4,40 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"os/exec"
 	fpath "path/filepath"
+	"strings"
 )
 
 var printf = fmt.Printf
 
-const (
-	VERSION = "19.7.1"
-)
+func getversion(srcdir string) string {
+	fh, err := os.Open(fpath.Join(srcdir, "VERSION"))
+	if err != nil {
+		printf("ERROR: %s\n", err)
+		os.Exit(1)
+	}
+	defer fh.Close()
+	r := bufio.NewScanner(fh)
+	r.Scan()
+	return strings.TrimSpace(r.Text())
+}
+
+func cmdrun(name string, arg ...string) {
+	cmd := exec.Command(name, arg...)
+	printf("  %s\n", name)
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		printf("ERROR: %s\n", err)
+		printf("%s", out)
+		os.Exit(2)
+	}
+}
 
 func main() {
-	printf("alfred-install version %s\n", VERSION)
-
 	gopath := os.Getenv("GOPATH")
 	if gopath == "" {
 		printf("E: could not get GOPATH env var\n")
@@ -32,19 +51,9 @@ func main() {
 		os.Exit(1)
 	}
 
+	printf("alfred-install version %s\n", getversion(srcdir))
 	printf("  source dir %s\n", srcdir)
+
 	cmdrun("./install.sh")
-
 	printf("done\n")
-}
-
-func cmdrun(name string, arg ...string) {
-	cmd := exec.Command(name, arg...)
-	printf("  %s\n", name)
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		printf("%s\n", err)
-		printf("%s", out)
-		os.Exit(2)
-	}
 }
