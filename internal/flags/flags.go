@@ -50,8 +50,8 @@ func Parse(progname string) {
 	Options.Parse(os.Args[1:])
 	log.Init(alfred.Config.Log.Level)
 	if showVersion {
-		log.Print(alfred.Version(progname))
+		log.Printf("%s %s (%s)", progname, alfred.Version(), alfred.VersionBuild())
 		os.Exit(0)
 	}
-	log.Print(alfred.Version(progname))
+	log.Printf("%s %s", progname, alfred.Version())
 }

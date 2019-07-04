@@ -8,7 +8,12 @@ import (
 )
 
 var version = "master"
+var version_build = "devel"
 
-func Version(prog string) string {
-	return fmt.Sprintf("%s version %s", prog, version)
+func Version() string {
+	return fmt.Sprintf("version %s", version)
+}
+
+func VersionBuild() string {
+	return fmt.Sprintf("build %s", version_build)
 }

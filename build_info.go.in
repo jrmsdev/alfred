@@ -3,5 +3,8 @@
 
 package alfred
 
-var installBinDir = "{{.InstallBinDir}}"
-var installLibDir = "{{.InstallLibDir}}"
+func init() {
+	version_build = "{{.VersionBuild}}"
+	installBinDir = "{{.InstallBinDir}}"
+	installLibDir = "{{.InstallLibDir}}"
+}

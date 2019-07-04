@@ -6,18 +6,15 @@ package main
 import (
 	"os"
 	fpath "path/filepath"
+	"time"
 
 	"github.com/jrmsdev/alfred/internal/_gen"
 )
 
-var data = map[string]string{}
-
-func main() {
-	data["InstallBinDir"] = getenv("ALFRED_BINDIR",
-		fpath.FromSlash("/usr/local/bin"))
-	data["InstallLibDir"] = getenv("ALFRED_LIBDIR",
-		fpath.FromSlash("/usr/local/lib/alfred"))
-	gen.Template("build_info.go.in", &data)
+var data = map[string]string{
+	"VersionBuild": time.Now().UTC().Format("20060102.150405"),
+	"InstallBinDir": getenv("ALFRED_BINDIR", fpath.FromSlash("/usr/local/bin")),
+	"InstallLibDir": getenv("ALFRED_LIBDIR", fpath.FromSlash("/usr/local/lib/alfred")),
 }
 
 func getenv(varname, defval string) string {
@@ -26,4 +23,8 @@ func getenv(varname, defval string) string {
 		v = defval
 	}
 	return v
+}
+
+func main() {
+	gen.Template("build_info.go.in", &data)
 }
