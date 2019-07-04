@@ -3,5 +3,5 @@
 
 package alfred
 
-//go:generate go run ./internal/_gen/version
 //go:generate go run ./internal/_gen/build_info
+//go:generate go run ./internal/_gen/version
