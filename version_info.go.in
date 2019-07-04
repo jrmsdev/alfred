@@ -8,14 +8,14 @@ import (
 )
 
 const (
-	sMajor = "{{.VMajor}}"
-	sMinor = "{{.VMinor}}"
-	sPatch = "{{.VPatch}}"
+	vMajor = "{{.VMajor}}"
+	vMinor = "{{.VMinor}}"
+	vPatch = "{{.VPatch}}"
 )
 
 func init() {
-	version = fmt.Sprintf("%s.%s", sMajor, sMinor)
-	if sPatch != "0" {
-		version = fmt.Sprintf("%s.%s", version, sPatch)
+	version = fmt.Sprintf("%s.%s", vMajor, vMinor)
+	if vPatch != "0" {
+		version = fmt.Sprintf("%s.%s", version, vPatch)
 	}
 }

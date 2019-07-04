@@ -2,3 +2,4 @@
 coverage.html
 coverage.out
 version_info.go
+build_info.go

@@ -14,6 +14,8 @@ LIBDIR=${DESTDIR}${PREFIX}/lib/alfred
 
 mkdir -p -m 0755 ${BINDIR} ${LIBDIR}/bin
 
+export ALFRED_INSTALL_PREFIX=${PREFIX}
+
 for pkg in $(cat build.pkg); do
 	src=${BUILDDIR}/${pkg}
 	if ! test -s ${src}; then
