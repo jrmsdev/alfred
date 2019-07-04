@@ -4,12 +4,13 @@ set -eu
 PKGLIST="$@"
 BUILDDIR=${BUILDDIR:-"${GOPATH}/pkg/alfred/build"}
 
-export ALFRED_INSTALL_PREFIX=${ALFRED_INSTALL_PREFIX:-'/usr/local'}
-
 mkdir -p ${BUILDDIR}
 if test "X" = "X${PKGLIST}"; then
 	PKGLIST=$(cat ./build.pkg)
 fi
+
+export ALFRED_BINDIR=${ALFRED_BINDIR:-'/usr/local/bin'}
+export ALFRED_LIBDIR=${ALFRED_LIBDIR:-'/usr/local/lib/alfred'}
 
 ./gen.sh
 

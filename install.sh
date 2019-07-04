@@ -9,12 +9,13 @@ export BUILDDIR=$(mktemp -d ${GOPATH}/pkg/alfred/build.XXXXXXX)
 DESTDIR=${DESTDIR:-''}
 PREFIX=${PREFIX:-'/usr/local'}
 
-BINDIR=${DESTDIR}${PREFIX}/bin
-LIBDIR=${DESTDIR}${PREFIX}/lib/alfred
+BINDIR=${ALFRED_BINDIR:-"${DESTDIR}${PREFIX}/bin"}
+LIBDIR=${ALFRED_LIBDIR:-"${DESTDIR}${PREFIX}/lib/alfred"}
 
 mkdir -p -m 0755 ${BINDIR} ${LIBDIR}/bin
 
-export ALFRED_INSTALL_PREFIX=${PREFIX}
+export ALFRED_BINDIR=${BINDIR}
+export ALFRED_LIBDIR=${LIBDIR}
 
 for pkg in $(cat build.pkg); do
 	src=${BUILDDIR}/${pkg}

@@ -5,6 +5,7 @@ package alfred
 
 import (
 	"os"
+	fpath "path/filepath"
 
 	"github.com/jrmsdev/alfred/internal/os/user"
 )
@@ -20,10 +21,12 @@ type alfredConfig struct {
 	Web struct {
 		Addr string
 	}
-	Dir      string
+	CfgDir   string
 	RunDir   string
 	DataDir  string
 	CacheDir string
+	BinDir   string
+	LibDir   string
 }
 
 var Config *alfredConfig
@@ -35,7 +38,7 @@ func init() {
 	Config.Log.Dir = getenv("ALFRED_LOGDIR",
 		user.Home(".local", "alfred", "log"))
 
-	Config.Dir = getenv("ALFRED_CFGDIR",
+	Config.CfgDir = getenv("ALFRED_CFGDIR",
 		user.Home(".config", "alfred"))
 	Config.RunDir = getenv("ALFRED_RUNDIR",
 		user.Home(".local", "alfred", "run"))
@@ -46,6 +49,9 @@ func init() {
 
 	Config.Core.Addr = getenv("ALFRED_CORE", "127.0.0.1:27719")
 	Config.Web.Addr = getenv("ALFRED_WEB", "127.0.0.1:21680")
+
+	Config.BinDir = installBinDir
+	Config.LibDir = installLibDir
 }
 
 func getenv(varname, defval string) string {

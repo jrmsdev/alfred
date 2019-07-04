@@ -3,6 +3,5 @@
 
 package alfred
 
-func init() {
-	installPrefix = "{{.InstallPrefix}}"
-}
+var installBinDir = "{{.InstallBinDir}}"
+var installLibDir = "{{.InstallLibDir}}"

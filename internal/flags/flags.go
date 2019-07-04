@@ -26,8 +26,8 @@ func newOptions(progname string) {
 	Options.StringVar(&alfred.Config.Log.Dir, "logdir",
 		alfred.Config.Log.Dir, "set log directory `path`")
 
-	Options.StringVar(&alfred.Config.Dir, "cfgdir",
-		alfred.Config.Dir, "set config directory `path`")
+	Options.StringVar(&alfred.Config.CfgDir, "cfgdir",
+		alfred.Config.CfgDir, "set config directory `path`")
 
 	Options.StringVar(&alfred.Config.RunDir, "rundir",
 		alfred.Config.RunDir, "set runtime directory `path`")

@@ -10,15 +10,20 @@ import (
 	"github.com/jrmsdev/alfred/internal/_gen"
 )
 
-var data = map[string]string{
-	"InstallPrefix": "",
-}
+var data = map[string]string{}
 
 func main() {
-	prefix := os.Getenv("ALFRED_INSTALL_PREFIX")
-	if prefix == "" {
-		prefix = fpath.FromSlash("/usr/local")
-	}
-	data["InstallPrefix"] = prefix
+	data["InstallBinDir"] = getenv("ALFRED_BINDIR",
+		fpath.FromSlash("/usr/local/bin"))
+	data["InstallLibDir"] = getenv("ALFRED_LIBDIR",
+		fpath.FromSlash("/usr/local/lib/alfred"))
 	gen.Template("build_info.go.in", &data)
+}
+
+func getenv(varname, defval string) string {
+	v := os.Getenv(varname)
+	if v == "" {
+		v = defval
+	}
+	return v
 }
