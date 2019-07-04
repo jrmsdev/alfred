@@ -54,4 +54,5 @@ func Parse(progname string) {
 		os.Exit(0)
 	}
 	log.Printf("%s %s", progname, alfred.Version())
+	alfred.Config.Validate()
 }

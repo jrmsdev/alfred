@@ -7,29 +7,59 @@ import (
 	"os"
 	fpath "path/filepath"
 
+	"github.com/jrmsdev/alfred/errors"
 	"github.com/jrmsdev/alfred/internal/os/user"
+	"github.com/jrmsdev/alfred/log"
 )
 
 var installBinDir = fpath.FromSlash("/usr/local/bin")
 var installLibDir = fpath.FromSlash("/usr/local/lib/alfred")
 
 type alfredConfig struct {
+	validateError bool
+
 	Log struct {
 		Level string
 		Dir   string
 	}
+
 	Core struct {
 		Addr string
 	}
+
 	Web struct {
 		Addr string
 	}
+
 	CfgDir   string
 	RunDir   string
 	DataDir  string
 	CacheDir string
 	BinDir   string
 	LibDir   string
+}
+
+func (obj *alfredConfig) checkIsAbs(name, checkpath string) {
+	if !fpath.IsAbs(checkpath) {
+		err := errors.New(errors.NotAbsPath, name, checkpath)
+		log.Error(err)
+		obj.validateError = true
+	}
+}
+
+func (obj *alfredConfig) Validate() {
+	log.Debug("validate")
+	obj.validateError = false
+	obj.checkIsAbs("logdir", obj.Log.Dir)
+	obj.checkIsAbs("cfgdir", obj.CfgDir)
+	obj.checkIsAbs("rundir", obj.RunDir)
+	obj.checkIsAbs("datadir", obj.DataDir)
+	obj.checkIsAbs("cachedir", obj.CacheDir)
+	obj.checkIsAbs("runtime bin dir", obj.BinDir)
+	obj.checkIsAbs("runtime lib dir", obj.LibDir)
+	if obj.validateError {
+		os.Exit(1)
+	}
 }
 
 var Config *alfredConfig
