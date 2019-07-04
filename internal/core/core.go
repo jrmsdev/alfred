@@ -3,14 +3,14 @@
 
 package core
 
-import (
-	"sync"
+//~ import (
+	//~ "sync"
 
-	"github.com/jrmsdev/alfred/log"
-)
+	//~ "github.com/jrmsdev/alfred/log"
+//~ )
 
-func Start(wg *sync.WaitGroup) error {
-	log.Debug("core worker")
-	defer wg.Done()
-	return nil
-}
+//~ func Start(wg *sync.WaitGroup) error {
+	//~ log.Debug("core worker")
+	//~ defer wg.Done()
+	//~ return nil
+//~ }

@@ -18,24 +18,18 @@ var Group = new(sync.WaitGroup)
 
 func Start(ctx context.Context, name string) error {
 	binfn := fpath.Join(alfred.Config.LibDir, "bin", name)
+	Group.Add(1)
 	if name == "web" {
-		Group.Add(1)
 		return web.Start(Group)
 	}
-	return dispatch(ctx, binfn)
+	return worker(ctx, binfn)
 }
 
-func dispatch(ctx context.Context, binfn string) error {
-	err := make(chan error)
-	Group.Add(1)
-	go worker(ctx, err, binfn)
-	Group.Done()
-	return <-err
-}
-
-func worker(ctx context.Context, err chan error, binfn string) {
+func worker(ctx context.Context, binfn string) error {
 	log.Debug("%s", binfn)
 	cmd := exec.CommandContext(ctx, binfn)
 	cmd.Start()
-	err <- cmd.Wait()
+	defer cmd.Process.Release()
+	defer Group.Done()
+	return nil
 }

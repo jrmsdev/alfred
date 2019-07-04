@@ -13,6 +13,7 @@ type msg struct {
 }
 
 var NotAbsPath = msg{"%s is not an absolute path: %s"}
+var WorkerFailed = msg{"worker process has failed"}
 
 func New(m msg, args ...interface{}) error {
 	return _errors.New(fmt.Sprintf(m.Format, args...))

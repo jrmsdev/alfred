@@ -4,28 +4,18 @@
 package main
 
 import (
-	"context"
-	"os"
+	"sync"
 
-	"github.com/jrmsdev/alfred/internal/worker"
-	"github.com/jrmsdev/alfred/log"
+	"github.com/jrmsdev/alfred/internal/core"
 )
 
-var bgctx = context.Background()
-
 func start() int {
-	ctx, cancel := context.WithCancel(bgctx)
-	defer cancel()
-	check(worker.Start(ctx, "core"), cancel)
-	check(worker.Start(ctx, "web"), cancel)
-	worker.Group.Wait()
+	wg := new(sync.WaitGroup)
+	wg.Add(1)
+	go func() {
+		core.Start()
+		wg.Done()
+	}()
+	wg.Wait()
 	return 0
-}
-
-func check(err error, cancel context.CancelFunc) {
-	if err != nil {
-		cancel()
-		log.Error(err)
-		os.Exit(2)
-	}
 }
