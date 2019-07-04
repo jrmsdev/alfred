@@ -2,9 +2,9 @@
 set -eu
 
 CMD=${1:?'command pkg path?'}
-BUILDDIR=${GOPATH}/pkg/alfred/build
+export BUILDDIR=${GOPATH}/pkg/alfred/build.run
 
-echo ${CMD} | grep -E '^\.\/cmd\/alfred' >/dev/null
+echo ${CMD} | grep -E '^cmd\/alfred' >/dev/null
 
 ./build.sh ${CMD}
 
