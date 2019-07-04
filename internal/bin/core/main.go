@@ -18,7 +18,7 @@ func main() {
 	rc := 0
 	flags.Parse("alfred-core")
 	log.Debug("init %s", alfred.Config.Core.Addr)
-	server.Start(alfred.Config.Core.Addr)
+	server.Start("core", alfred.Config.Core.Addr)
 	log.Debug("exit(%d)", rc)
 	os.Exit(rc)
 }

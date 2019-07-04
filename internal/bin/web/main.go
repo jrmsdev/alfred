@@ -18,7 +18,7 @@ func main() {
 	rc := 0
 	flags.Parse("alfred-web")
 	log.Debug("init %s", alfred.Config.Web.Addr)
-	server.Start(alfred.Config.Web.Addr)
+	server.Start("web", alfred.Config.Web.Addr)
 	log.Debug("exit(%d)", rc)
 	os.Exit(rc)
 }
