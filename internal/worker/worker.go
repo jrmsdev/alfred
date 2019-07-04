@@ -4,6 +4,8 @@
 package worker
 
 import (
+	"context"
+	//~ "os/exec"
 	fpath "path/filepath"
 	"sync"
 
@@ -14,17 +16,22 @@ import (
 
 var Group = new(sync.WaitGroup)
 
-func Start(name string) error {
+func Start(ctx context.Context, name string) error {
 	binfn := fpath.Join(alfred.Config.LibDir, "bin", name)
-	Group.Add(1)
 	if name == "web" {
+		Group.Add(1)
 		return web.Start(Group)
 	}
 	return dispatch(binfn)
 }
 
 func dispatch(binfn string) error {
+	err := make(chan error)
 	log.Debug("dispatch %s", binfn)
+	Group.Add(1)
+	go func() {
+		err <- nil
+	}()
 	Group.Done()
-	return nil
+	return <-err
 }

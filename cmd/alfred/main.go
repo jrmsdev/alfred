@@ -26,10 +26,3 @@ func main() {
 	log.Debug("exit(%d)", rc)
 	os.Exit(rc)
 }
-
-func check(err error) {
-	if err != nil {
-		log.Error(err)
-		os.Exit(2)
-	}
-}
