@@ -29,8 +29,7 @@ for pkg in $(cat build.pkg); do
 		dstname=bin/${dstname}
 	fi
 	dst=${dstdir}/${dstname}
-	echo "-- install ${dst}"
-	install -m 0755 ${src} ${dst}
+	install -v -m 0755 ${src} ${dst}
 done
 
 rm -rf ${BUILDDIR}

@@ -12,15 +12,13 @@ for pkg in $(cat build.pkg); do
 	if echo ${pkg} | grep -E '^cmd\/' >/dev/null; then
 		dst=${dstdir}/$(basename ${pkg})
 		if test -e ${dst}; then
-			echo "-- remove ${dst}"
-			rm -f ${dst}
+			rm -vf ${dst}
 		fi
 	fi
 done
 
 if test -d ${LIBDIR}; then
-	echo "-- remove ${LIBDIR}"
-	rm -rf ${LIBDIR}
+	rm -vrf ${LIBDIR}
 fi
 
 exit 0
