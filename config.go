@@ -10,6 +10,9 @@ import (
 	"github.com/jrmsdev/alfred/internal/os/user"
 )
 
+var installBinDir = fpath.FromSlash("/usr/local/bin")
+var installLibDir = fpath.FromSlash("/usr/local/lib/alfred")
+
 type alfredConfig struct {
 	Log struct {
 		Level string
