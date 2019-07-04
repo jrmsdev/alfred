@@ -5,7 +5,7 @@ package worker
 
 import (
 	"context"
-	//~ "os/exec"
+	"os/exec"
 	fpath "path/filepath"
 	"sync"
 
@@ -22,16 +22,20 @@ func Start(ctx context.Context, name string) error {
 		Group.Add(1)
 		return web.Start(Group)
 	}
-	return dispatch(binfn)
+	return dispatch(ctx, binfn)
 }
 
-func dispatch(binfn string) error {
+func dispatch(ctx context.Context, binfn string) error {
 	err := make(chan error)
-	log.Debug("dispatch %s", binfn)
 	Group.Add(1)
-	go func() {
-		err <- nil
-	}()
+	go worker(ctx, err, binfn)
 	Group.Done()
 	return <-err
+}
+
+func worker(ctx context.Context, err chan error, binfn string) {
+	log.Debug("%s", binfn)
+	cmd := exec.CommandContext(ctx, binfn)
+	cmd.Start()
+	err <- cmd.Wait()
 }
