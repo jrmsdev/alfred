@@ -4,13 +4,20 @@
 package web
 
 import (
-	"sync"
+	"context"
+	"os/exec"
+	fpath "path/filepath"
 
+	"github.com/jrmsdev/alfred"
 	"github.com/jrmsdev/alfred/log"
 )
 
-func Start(wg *sync.WaitGroup) error {
-	log.Debug("web worker")
-	defer wg.Done()
-	return nil
+func Start(ctx context.Context) {
+	bin := fpath.Join(alfred.Config.LibDir, "bin", "web")
+	log.Debug(bin)
+	cmd := exec.Command(bin)
+	err := cmd.Run()
+	if err != nil {
+		log.Errorf("web worker: %s", err)
+	}
 }
