@@ -26,10 +26,11 @@ func Start(ctx context.Context, name string) error {
 		log.Error(err)
 		return err
 	}
-	cmd := exec.Command(bin, args...)
-	err := cmd.Run()
+	cmd := exec.CommandContext(ctx, bin, args...)
+	err := cmd.Start()
 	if err != nil {
-		log.Errorf("web worker: %s", err)
+		log.Errorf("%s worker start: %s", name, err)
 	}
-	return err
+	log.Debug("%d %s", cmd.Process.Pid, cmd.Path)
+	return cmd.Wait()
 }

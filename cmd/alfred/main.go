@@ -12,7 +12,7 @@ import (
 
 func main() {
 	flags.Parse("alfred")
-	log.Debug("init")
+	log.Debug("%d %s", os.Getpid(), os.Args[0])
 	rc := 0
 
 	action := flags.Options.Arg(0)
