@@ -1,10 +1,15 @@
 package main
 
 import (
-	"github.com/astaxie/beego"
 	_ "github.com/jrmsdev/alfred/internal/server/web/routers"
+
+	"github.com/jrmsdev/alfred/internal/server"
+
+	"github.com/astaxie/beego"
 )
 
 func main() {
-	beego.Run()
+	beego.BConfig.Listen.AdminPort = 21681
+	beego.BConfig.WebConfig.AutoRender = true
+	server.Start("web", "127.0.0.1:21680")
 }

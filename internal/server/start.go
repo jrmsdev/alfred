@@ -28,7 +28,6 @@ func Start(name, addr string) {
 	beego.BConfig.Listen.EnableHTTPS = false
 	beego.BConfig.Listen.EnableAdmin = false
 	beego.BConfig.Listen.AdminAddr = "127.0.0.1"
-	beego.BConfig.Listen.AdminPort = 27720
 	// session config
 	beego.BConfig.WebConfig.Session.SessionOn = false
 	beego.BConfig.WebConfig.Session.SessionProvider = "memory"
