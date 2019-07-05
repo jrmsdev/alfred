@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  digest = "1:5bac76509f3a58c157a95bab9ca8c742c1994ce72ae383837f98d487bb9fe9f3"
+  digest = "1:2a4c84b05ae208ba738b7a90a0637738161193b7efd2f256b6422ff8c4e4148d"
   name = "github.com/astaxie/beego"
   packages = [
     ".",
@@ -16,8 +16,8 @@
     "utils",
   ]
   pruneopts = "UT"
-  revision = "1b6edafc96ad27b6515fafeccd7339dda3e997b1"
-  version = "v1.11.1"
+  revision = "32ee728078c84c28f2642c70745afc8f6830044d"
+  version = "v1.12.0"
 
 [[projects]]
   branch = "master"
@@ -34,6 +34,14 @@
   pruneopts = "UT"
   revision = "b4936e06046bbecbb94cae9c18127ebe510a2cb9"
   version = "v4.20"
+
+[[projects]]
+  branch = "master"
+  digest = "1:44fbfce27cb96b7d20217634af466093485a3e8132820acbe95949cb64e7fc60"
+  name = "github.com/shiena/ansicolor"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "a422bbe96644373c5753384a59d678f7d261ff10"
 
 [[projects]]
   digest = "1:237af0cf68bac89e21af72e6cd6b64f388854895e75f82ad08c6c011e1a8286c"
@@ -117,7 +125,6 @@
   analyzer-version = 1
   input-imports = [
     "github.com/astaxie/beego",
-    "github.com/astaxie/beego/context/param",
     "github.com/astaxie/beego/logs",
     "github.com/smartystreets/goconvey/convey",
   ]
