@@ -38,6 +38,9 @@ func newOptions(progname string) {
 	Options.StringVar(&alfred.Config.CacheDir, "cachedir",
 		alfred.Config.CacheDir, "set cache directory `path`")
 
+	Options.StringVar(&alfred.Config.LibDir, "libdir",
+		alfred.Config.LibDir, "set lib directory `path`")
+
 	Options.StringVar(&alfred.Config.Core.Addr, "core.addr",
 		alfred.Config.Core.Addr, "set core bind `address`")
 
