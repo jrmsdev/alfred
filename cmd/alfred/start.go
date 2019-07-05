@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/jrmsdev/alfred/internal/core"
-	"github.com/jrmsdev/alfred/internal/web"
+	"github.com/jrmsdev/alfred/internal/worker"
 )
 
 var bgctx = context.Background()
@@ -26,8 +26,11 @@ func start() int {
 	defer cancel()
 	wg.Add(1)
 	go func() {
-		web.Start(ctx)
-		wg.Done()
+		defer wg.Done()
+		err := worker.Start(ctx, "web")
+		if err != nil {
+			cancel()
+		}
 	}()
 	wg.Wait()
 	return 0

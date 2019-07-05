@@ -11,9 +11,9 @@ import (
 )
 
 func main() {
-	rc := 0
 	flags.Parse("alfred")
 	log.Debug("init")
+	rc := 0
 
 	action := flags.Options.Arg(0)
 	if action == "" || action == "start" {
