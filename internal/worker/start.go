@@ -21,15 +21,15 @@ func Start(ctx context.Context, name string) error {
 		args = make([]string, 0)
 	}
 	bin := fpath.Join(alfred.Config.LibDir, "bin", name)
-	log.Debug("%s %v", bin, args)
 	if _, err := os.Stat(bin); err != nil {
 		log.Error(err)
 		return err
 	}
+	log.Debug("%s %v", bin, args)
 	cmd := exec.CommandContext(ctx, bin, args...)
 	err := cmd.Start()
 	if err != nil {
-		log.Errorf("%s worker start: %s", name, err)
+		log.Errorf("%s: %s", name, err)
 	}
 	log.Debug("%d %s", cmd.Process.Pid, cmd.Path)
 	return cmd.Wait()

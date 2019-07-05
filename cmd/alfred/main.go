@@ -6,6 +6,7 @@ package main
 import (
 	"os"
 
+	"github.com/jrmsdev/alfred"
 	"github.com/jrmsdev/alfred/internal/flags"
 	"github.com/jrmsdev/alfred/log"
 )
@@ -13,8 +14,8 @@ import (
 func main() {
 	flags.Parse("alfred")
 	log.Debug("%d %s", os.Getpid(), os.Args[0])
+	log.Printf("http://%s/", alfred.Config.Web.Addr)
 	rc := 0
-
 	action := flags.Options.Arg(0)
 	if action == "" || action == "start" {
 		rc = start()
