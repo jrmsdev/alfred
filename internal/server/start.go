@@ -17,7 +17,7 @@ func Start(name, addr string) {
 	logs.Async()
 	logs.SetLogger(logs.AdapterFile,
 		fmt.Sprintf(`{"filename":"%s.log","level":%d,"perm":"0640"}`,
-		fpath.Join(alfred.Config.Log.Dir, name), logs.LevelDebug))
+			fpath.Join(alfred.Config.Log.Dir, name), logs.LevelDebug))
 	beego.BConfig.WebConfig.DirectoryIndex = false
 	beego.Run(addr)
 }
