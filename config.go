@@ -75,6 +75,20 @@ func getenv(varname, defval string) string {
 	return v
 }
 
+func (obj *alfredConfig) checkLogLevel() {
+	valid := map[string]bool{
+		"default": true,
+		"debug": true,
+		"warn": true,
+		"error": true,
+		"quiet": true,
+	}
+	if !valid[obj.Log.Level] {
+		log.Errorf("invalid log level: %s", obj.Log.Level)
+		obj.validateError = true
+	}
+}
+
 func (obj *alfredConfig) checkIsAbs(name, checkpath string) {
 	if !fpath.IsAbs(checkpath) {
 		err := errors.New(errors.NotAbsPath, name, checkpath)
@@ -86,6 +100,7 @@ func (obj *alfredConfig) checkIsAbs(name, checkpath string) {
 func (obj *alfredConfig) Validate() {
 	log.Debug("validate")
 	obj.validateError = false
+	obj.checkLogLevel()
 	obj.checkIsAbs("logdir", obj.Log.Dir)
 	obj.checkIsAbs("cfgdir", obj.CfgDir)
 	obj.checkIsAbs("rundir", obj.RunDir)
