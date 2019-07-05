@@ -4,13 +4,10 @@
 package test
 
 import (
-	"net/http"
-	"net/http/httptest"
 	fpath "path/filepath"
-	"runtime"
 	"testing"
 
-	"github.com/jrmsdev/alfred/internal/_t/check"
+	"github.com/jrmsdev/alfred/internal/_t/webapp"
 
 	_ "github.com/jrmsdev/alfred/internal/server/web/routers"
 
@@ -18,17 +15,12 @@ import (
 )
 
 func init() {
-	_, file, _, _ := runtime.Caller(0)
-	apppath, _ := fpath.Abs(fpath.Dir(fpath.Join(file, ".."+string(fpath.Separator))))
+	apppath, _ := fpath.Abs(fpath.FromSlash("./.."))
 	beego.TestBeegoInit(apppath)
 }
 
 func TestGet(t *testing.T) {
-	r, _ := http.NewRequest("GET", "/", nil)
-	w := httptest.NewRecorder()
-	beego.BeeApp.Handlers.ServeHTTP(w, r)
-
-	if check.NotEqual(t, w.Code, 200, "response status") {
-		t.FailNow()
-	}
+	c := webapp.Client()
+	c.Get("/")
+	c.Code(t, 200)
 }
