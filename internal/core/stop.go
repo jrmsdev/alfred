@@ -4,8 +4,6 @@
 package core
 
 import (
-	_ "github.com/jrmsdev/alfred/internal/server/api/routers"
-
 	"github.com/jrmsdev/alfred"
 	"github.com/jrmsdev/alfred/internal/server"
 	"github.com/jrmsdev/alfred/log"
