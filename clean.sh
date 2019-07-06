@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eu
 BUILDDIR=${GOPATH}/pkg/alfred/build
-go clean -i -cache -testcache ./...
+go clean -i -testcache ./...
 rm -vf coverage.out coverage.html \
 	build_info.go \
 	version_info.go
