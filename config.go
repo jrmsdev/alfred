@@ -79,10 +79,10 @@ func getenv(varname, defval string) string {
 func (obj *alfredConfig) checkLogLevel() {
 	valid := map[string]bool{
 		"default": true,
-		"debug": true,
-		"warn": true,
-		"error": true,
-		"quiet": true,
+		"debug":   true,
+		"warn":    true,
+		"error":   true,
+		"quiet":   true,
 	}
 	if !valid[obj.Log.Level] {
 		log.Errorf("invalid log level: %s", obj.Log.Level)

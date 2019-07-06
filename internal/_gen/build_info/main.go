@@ -12,7 +12,7 @@ import (
 )
 
 var data = map[string]string{
-	"VersionBuild":  time.Now().UTC().Format("060102.150405"),
+	"VersionBuild": time.Now().UTC().Format("060102.150405"),
 	"InstallBinDir": getenv("ALFRED_BINDIR",
 		fpath.FromSlash("/usr/local/bin")),
 	"InstallLibDir": getenv("ALFRED_LIBDIR",

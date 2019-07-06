@@ -14,7 +14,7 @@ import (
 )
 
 type testClient struct {
-	Req *http.Request
+	Req  *http.Request
 	Resp *httptest.ResponseRecorder
 }
 

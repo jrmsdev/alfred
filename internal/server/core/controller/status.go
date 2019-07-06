@@ -16,8 +16,8 @@ type Status struct {
 
 func (s *Status) Get() {
 	s.Data["json"] = beego.M{
-		"status": model.GetStatus(),
-		"version": alfred.GetVersion(),
+		"status":        model.GetStatus(),
+		"version":       alfred.GetVersion(),
 		"version.build": alfred.GetVersionBuild(),
 	}
 	s.ServeJSON()

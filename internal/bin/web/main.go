@@ -12,13 +12,18 @@ import (
 	"github.com/jrmsdev/alfred/internal/flags"
 	"github.com/jrmsdev/alfred/internal/server"
 	"github.com/jrmsdev/alfred/log"
+
+	"github.com/astaxie/beego"
 )
 
 func main() {
 	rc := 0
 	flags.Parse("alfred-web")
 	log.Debug("init %s", alfred.Config.Web.Addr)
+
+	beego.BConfig.WebConfig.AutoRender = true
 	server.Start("web", alfred.Config.Web.Addr)
+
 	log.Debug("exit(%d)", rc)
 	os.Exit(rc)
 }

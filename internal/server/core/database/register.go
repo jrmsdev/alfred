@@ -8,10 +8,10 @@ import (
 	fpath "path/filepath"
 
 	"github.com/astaxie/beego/orm"
+	_ "github.com/mattn/go-sqlite3"
 
 	"github.com/jrmsdev/alfred"
-
-	_ "github.com/mattn/go-sqlite3"
+	"github.com/jrmsdev/alfred/internal/server/core/controller"
 )
 
 const drvargs = "cache=shared&mode=rwc&_loc=UTC&_locking=EXCLUSIVE"
@@ -19,5 +19,5 @@ const drvargs = "cache=shared&mode=rwc&_loc=UTC&_locking=EXCLUSIVE"
 func init() {
 	orm.RegisterDataBase("default", "sqlite3",
 		fmt.Sprintf("file:%s?%s",
-		fpath.Join(alfred.Config.DataDir, "core.db"), drvargs))
+			fpath.Join(alfred.Config.DataDir, "core.db"), drvargs))
 }

@@ -4,6 +4,7 @@
 package main
 
 import (
+	_ "github.com/jrmsdev/alfred/internal/server/core/database"
 	_ "github.com/jrmsdev/alfred/internal/server/core/router"
 
 	"github.com/jrmsdev/alfred/internal/server"
