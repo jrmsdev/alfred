@@ -6,7 +6,7 @@ package controller
 import (
 	"github.com/astaxie/beego"
 
-	"github.com/jrmsdev/alfred/internal/server/api/model"
+	"github.com/jrmsdev/alfred/internal/server/core/model"
 )
 
 type Status struct {

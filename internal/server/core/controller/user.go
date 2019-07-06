@@ -5,7 +5,7 @@ package controller
 
 import (
 	"encoding/json"
-	"github.com/jrmsdev/alfred/internal/server/api/model"
+	"github.com/jrmsdev/alfred/internal/server/core/model"
 
 	"github.com/astaxie/beego"
 )

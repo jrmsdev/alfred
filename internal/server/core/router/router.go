@@ -4,7 +4,7 @@
 package router
 
 import (
-	"github.com/jrmsdev/alfred/internal/server/api/controller"
+	"github.com/jrmsdev/alfred/internal/server/core/controller"
 
 	"github.com/astaxie/beego"
 )

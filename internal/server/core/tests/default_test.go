@@ -9,7 +9,7 @@ import (
 
 	"github.com/jrmsdev/alfred/internal/_t/webapp"
 
-	_ "github.com/jrmsdev/alfred/internal/server/api/router"
+	_ "github.com/jrmsdev/alfred/internal/server/core/router"
 
 	"github.com/astaxie/beego"
 )
