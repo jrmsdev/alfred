@@ -2,8 +2,8 @@
 set -eu
 BUILDDIR=${GOPATH}/pkg/alfred/build
 go clean -i -testcache ./...
+rm -vrf ${BUILDDIR} ${BUILDDIR}.*
 rm -vf coverage.out coverage.html \
 	build_info.go \
 	version_info.go
-rm -vrf ${BUILDDIR} ${BUILDDIR}.*
 exit 0
