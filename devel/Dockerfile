@@ -28,6 +28,7 @@ USER alfred:alfred
 
 ENV PAGER less
 ENV ALFRED_CORE 'alfred-devel:27719'
-ENV ALFRED_WEB 'alfred-devel:21680'
+#ENV ALFRED_WEB 'alfred-devel:21680'
+ENV ALFRED_WEB ''
 
 CMD exec /bin/bash -i -l

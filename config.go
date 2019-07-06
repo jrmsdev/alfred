@@ -61,7 +61,8 @@ func init() {
 		user.Home(".cache", "alfred"))
 
 	Config.Core.Addr = getenv("ALFRED_CORE", "127.0.0.1:27719")
-	Config.Web.Addr = getenv("ALFRED_WEB", "127.0.0.1:21680")
+	//~ Config.Web.Addr = getenv("ALFRED_WEB", "127.0.0.1:21680")
+	Config.Web.Addr = getenv("ALFRED_WEB", "")
 
 	Config.BinDir = installBinDir
 	Config.LibDir = installLibDir
