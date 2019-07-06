@@ -20,7 +20,7 @@ RUN apt-get clean
 RUN apt-get update
 RUN apt-get dist-upgrade -yy --purge
 
-RUN apt-get install --no-install-recommends -yy gcc libc6-dev
+RUN apt-get install --no-install-recommends -yy gcc libc-dev
 
 RUN apt-get clean
 RUN apt-get autoremove -yy --purge

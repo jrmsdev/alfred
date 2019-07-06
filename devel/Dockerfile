@@ -12,7 +12,7 @@ RUN apt-get clean
 RUN apt-get update
 
 RUN apt-get install -yy --no-install-recommends sudo less golang-golang-x-tools\
-	gcc libc-dev
+	git go-dep
 
 RUN apt-get clean
 RUN apt-get autoremove -yy --purge
