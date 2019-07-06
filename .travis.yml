@@ -15,10 +15,11 @@ branches:
   only:
     - master
 
+env:
+  - GO111MODULE="off"
+  - GOPROXY=""
+
 matrix:
-  env:
-    - GO111MODULE="off"
-    - GOPROXY=""
   include:
     - os: osx
       go: 1.x
