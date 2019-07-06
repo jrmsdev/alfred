@@ -5,6 +5,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	fpath "path/filepath"
 
 	_ "github.com/jrmsdev/alfred/internal/server/core/database"
@@ -24,6 +25,14 @@ func main() {
 
 	beego.BConfig.Listen.AdminPort = 27720
 	beego.BConfig.WebConfig.AutoRender = false
+
+	force := true
+	verbose := true
+	err := orm.RunSyncdb("default", force, verbose)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
 	server.Start("core", "127.0.0.1:27719")
 }

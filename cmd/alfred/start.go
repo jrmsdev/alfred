@@ -21,16 +21,16 @@ func start() int {
 
 	wg.Add(1)
 	go func() {
+		defer wg.Done()
 		core.Start()
-		wg.Done()
 	}()
-	time.Sleep(100 * time.Millisecond)
 
 	ctx, cancel := context.WithCancel(bgctx)
 	defer cancel()
 
 	if alfred.Config.Web.Addr != "" {
 		log.Debug("web worker enabled")
+		time.Sleep(100 * time.Millisecond)
 		wg.Add(1)
 		go func() {
 			defer wg.Done()

@@ -5,6 +5,7 @@ package core
 
 import (
 	"fmt"
+	"os"
 	fpath "path/filepath"
 
 	_ "github.com/jrmsdev/alfred/internal/server/core/database"
@@ -28,6 +29,14 @@ func Start() {
 			fpath.Join(alfred.Config.DataDir, "core.db"), drvargs))
 
 	beego.BConfig.WebConfig.AutoRender = false
+
+	force := false
+	verbose := false
+	err := orm.RunSyncdb("default", force, verbose)
+	if err != nil {
+		log.Error(err)
+		os.Exit(1)
+	}
 
 	server.Start("core", alfred.Config.Core.Addr)
 }
