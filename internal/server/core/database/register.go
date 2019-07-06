@@ -11,12 +11,14 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 
 	"github.com/jrmsdev/alfred"
-	"github.com/jrmsdev/alfred/internal/server/core/controller"
+	"github.com/jrmsdev/alfred/internal/server/core/model"
 )
 
 const drvargs = "cache=shared&mode=rwc&_loc=UTC&_locking=EXCLUSIVE"
 
 func init() {
+	orm.RegisterModel(&model.Status{})
+
 	orm.RegisterDataBase("default", "sqlite3",
 		fmt.Sprintf("file:%s?%s",
 			fpath.Join(alfred.Config.DataDir, "core.db"), drvargs))
