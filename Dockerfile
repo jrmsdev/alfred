@@ -1,7 +1,7 @@
 FROM jrmsdev/golang:testing
 
 LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
-LABEL version="19.7.3"
+LABEL version="19.7.5"
 
 USER root:root
 
@@ -19,6 +19,8 @@ RUN chmod 0644 /etc/apt/apt.conf.d/02proxy
 RUN apt-get clean
 RUN apt-get update
 RUN apt-get dist-upgrade -yy --purge
+
+RUN apt-get install --no-install-recommends -yy gcc libc6-dev
 
 RUN apt-get clean
 RUN apt-get autoremove -yy --purge
@@ -50,5 +52,6 @@ ENV ALFRED_WEB 'alfred:21680'
 
 RUN go env | sort
 RUN go version
+RUN gcc --version
 
 CMD ./docker/container/dispatch.sh
