@@ -15,8 +15,8 @@ import (
 
 func Start(name, addr string) {
 	// app config
-	beego.BConfig.AppName = name
-	beego.BConfig.ServerName = name
+	beego.BConfig.AppName = fmt.Sprintf("alfred-%s", name)
+	beego.BConfig.ServerName = beego.BConfig.AppName
 	beego.BConfig.RecoverPanic = true
 	beego.BConfig.EnableErrorsShow = true
 	beego.BConfig.Log.EnableStaticLogs = true
