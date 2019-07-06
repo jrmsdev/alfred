@@ -10,8 +10,16 @@ import (
 var version = "master"
 var version_build = "devel"
 
+func GetVersion() string {
+	return version
+}
+
 func Version() string {
 	return fmt.Sprintf("version %s", version)
+}
+
+func GetVersionBuild() string {
+	return version_build
 }
 
 func VersionBuild() string {
