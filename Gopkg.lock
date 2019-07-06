@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  digest = "1:2a4c84b05ae208ba738b7a90a0637738161193b7efd2f256b6422ff8c4e4148d"
+  digest = "1:298503affa53659a330059142515c4ac5c193733606abef4721fc5fb9776c9fa"
   name = "github.com/astaxie/beego"
   packages = [
     ".",
@@ -11,6 +11,7 @@
     "context/param",
     "grace",
     "logs",
+    "orm",
     "session",
     "toolbox",
     "utils",
@@ -18,6 +19,14 @@
   pruneopts = "UT"
   revision = "32ee728078c84c28f2642c70745afc8f6830044d"
   version = "v1.12.0"
+
+[[projects]]
+  digest = "1:4a49346ca45376a2bba679ca0e83bec949d780d4e927931317904bad482943ec"
+  name = "github.com/mattn/go-sqlite3"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "c7c4067b79cc51e6dfdcef5c702e74b1e0fa7c75"
+  version = "v1.10.0"
 
 [[projects]]
   branch = "master"
@@ -85,6 +94,8 @@
   input-imports = [
     "github.com/astaxie/beego",
     "github.com/astaxie/beego/logs",
+    "github.com/astaxie/beego/orm",
+    "github.com/mattn/go-sqlite3",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
